@@ -94,14 +94,14 @@ export function Navbar() {
                 key={key}
                 href={href}
                 className={`relative text-xs tracking-[0.15em] transition-colors ${
-                  active ? "text-neutral-900" : linkBase
+                  active ? "text-[#F58220]" : linkBase
                 }`}
               >
                 {p.nav[key]}
 
                 {/* UNDERLINE */}
                 <span
-                  className={`absolute left-0 -bottom-2 h-px bg-black transition-all duration-300 ${
+                  className={`absolute left-0 -bottom-2 h-px bg-[#F58220] transition-all duration-300 ${
                     active ? "w-full" : "w-0"
                   }`}
                 />

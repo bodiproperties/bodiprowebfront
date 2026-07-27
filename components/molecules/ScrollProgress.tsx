@@ -35,7 +35,7 @@ export function ScrollProgress() {
       {/* Доод зураас — прогресстой (дvvрч явна) */}
       <div className="relative h-32 w-px bg-neutral-200">
         <div
-          className="absolute left-0 top-0 w-px bg-neutral-900 transition-all duration-150 ease-out"
+          className="absolute left-0 top-0 w-px bg-[#F58220] transition-all duration-150 ease-out"
           style={{ height: `${progress}%` }}
         />
       </div>
