@@ -137,7 +137,7 @@ export default function ProjectsSection() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative text-sm tracking-[0.25em] uppercase pb-3 transition ${
+                className={`relative text-sm tracking-[0.25em] uppercase pb-3 transition cursor-pointer ${
                   activeTab === tab
                     ? "text-black"
                     : "text-neutral-400 hover:text-black"
@@ -170,7 +170,7 @@ export default function ProjectsSection() {
                     className="object-cover transition duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/25 transition" />
-                  <div className="absolute bottom-7 left-7 opacity-0 group-hover:opacity-100 transition duration-500">
+                  <div className="absolute bottom-7 left-7 opacity-0 group-hover:opacity-100 transition duration-500 cursor-pointer">
                     <p className="text-white text-xs tracking-[0.3em] uppercase">
                       View Project →
                     </p>
@@ -223,7 +223,7 @@ export default function ProjectsSection() {
               </p>
             </Reveal>
             <Reveal direction="right" delay={150}>
-              <button className="px-10 py-4 border border-black hover:bg-black hover:text-white transition tracking-[0.2em] text-sm">
+              <button className="px-10 py-4 border border-black hover:bg-black hover:text-white transition tracking-[0.2em] text-sm cursor-pointer">
                 START A PROJECT
               </button>
             </Reveal>

@@ -46,7 +46,7 @@ export function Navbar() {
       }`}
     >
       <nav
-        className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between"
+        className="max-w-350 mx-auto px-8 py-6 flex items-center justify-between"
         aria-label="Main navigation"
       >
         {/* ⭐ LOGO — 2 image layer-ээр fade transition */}

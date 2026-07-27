@@ -160,7 +160,7 @@ export default function NewsPage() {
             </p>
           </Reveal>
           <Reveal direction="right" delay={150}>
-            <button className="px-10 py-4 border border-black hover:bg-black hover:text-white transition text-sm tracking-[0.2em]">
+            <button className="px-10 py-4 border border-black hover:bg-black hover:text-white transition text-sm tracking-[0.2em] cursor-pointer">
               SUBSCRIBE
             </button>
           </Reveal>

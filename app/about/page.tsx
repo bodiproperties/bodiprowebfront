@@ -207,7 +207,7 @@ export default function AboutPage() {
           </h2>
           <button
             onClick={() => setOpenModal(true)}
-            className="mt-10 px-10 py-4 border border-white hover:bg-white hover:text-black transition tracking-widest text-sm"
+            className="mt-10 px-10 py-4 border border-white hover:bg-white hover:text-black transition tracking-widest text-sm cursor-pointer"
           >
             CONTACT US
           </button>

@@ -106,7 +106,7 @@ export default function CareersPage() {
                     {job.location} · {job.type}
                   </p>
                 </div>
-                <button className="border border-neutral-900 px-8 py-3 hover:bg-black hover:text-white transition">
+                <button className="border border-neutral-900 px-8 py-3 hover:bg-black hover:text-white transition cursor-pointer">
                   Apply
                 </button>
               </div>
@@ -141,7 +141,7 @@ export default function CareersPage() {
           <p className="mt-8 text-lg">
             Send your portfolio and CV to careers@bodiproperties.mn
           </p>
-          <button className="mt-12 border border-black px-10 py-4 hover:bg-black hover:text-white transition">
+          <button className="mt-12 border border-black px-10 py-4 hover:bg-black hover:text-white transition cursor-pointer">
             Contact HR
           </button>
         </Reveal>

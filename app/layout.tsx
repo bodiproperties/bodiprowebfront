@@ -8,6 +8,7 @@ import { LanguageProvider } from '@/lib/language-context'
 import './globals.css'
 import { Navbar } from '@/components/molecules/Navbar'
 import { Footer } from '@/components/molecules/Footer'
+import { ScrollProgress } from '@/components/molecules/ScrollProgress'
 
 export const metadata: Metadata = {
   title: 'Bodi Properties LLC - Бодь Пропертийз ХХК',
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en" className="bg-background">
       <body className="font-sans antialiased text-foreground">
         <LanguageProvider>
+          <ScrollProgress />
           <Navbar />
           {children}
           <Footer />
