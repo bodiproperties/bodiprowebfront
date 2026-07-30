@@ -72,7 +72,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
           <p className="text-xs tracking-[0.35em] text-[#F58220] uppercase">
-            About us
+            БИДНИЙ ТУХАЙ
           </p>
           <h1 className="mt-6 text-5xl md:text-7xl font-extralight text-white leading-tight max-w-4xl">
             We design spaces that define modern living
@@ -83,15 +83,13 @@ export default function AboutPage() {
       {/* INTRO */}
       <section className="max-w-5xl mx-auto px-6 py-28">
         <Reveal direction="left">
-          <h2 className="text-3xl md:text-5xl font-extralight leading-snug">
-            Architecture is not just construction — it is experience, emotion, and
-            identity.
+          <h2 className="text-3xl md:text-5xl font-extralight leading-snug text-center">
+            Алсын хараа эрхэм зорлиго
           </h2>
         </Reveal>
         <Reveal direction="right" delay={150}>
-          <p className="mt-10 text-neutral-600 leading-relaxed">
-            We are a multidisciplinary architecture studio focused on creating
-            timeless spaces through simplicity, light, and material honesty.
+          <p className="mt-10 text-neutral-600 leading-relaxed text-center">
+            Бодь Пропертийз” ХХК нь анх 1997 онд үл хөдлөх хөрөнгө, барилга угсралтын ажлын төлөвлөлт, санхүүжилт, хэрэгжилтийг иж бүрнээр нь гүйцэтгэгч төслийн байгууллагын хэлбэрээр үйл ажиллагаа явуулж эхэлсэн. Байгуулагдсанаас хойш барилгын салбар цаашлаад улс, нийслэлийн их бүтээн байгуулалт, өнгө төрхөд бодитой хувь нэмэр оруулсан олон төслүүдийг амжилттай хэрэгжүүлсэн. 
           </p>
         </Reveal>
       </section>
@@ -99,14 +97,14 @@ export default function AboutPage() {
       {/* MISSION / VISION */}
       <section className="max-w-5xl mx-auto px-6 md:px-16 lg:px-24 py-20 grid md:grid-cols-2 gap-16">
         <Reveal direction="left">
-          <h2 className="text-2xl font-light mb-4">Our Mission</h2>
+          <h2 className="text-2xl font-light mb-4">Эрхэм зорлиго</h2>
           <p className="text-neutral-600 leading-relaxed">
             To design functional and emotional spaces that improve the way
             people live, work, and interact with their environment.
           </p>
         </Reveal>
         <Reveal direction="right" delay={150}>
-          <h2 className="text-2xl font-light mb-4">Our Vision</h2>
+          <h2 className="text-2xl font-light mb-4">Алсын хараа</h2>
           <p className="text-neutral-600 leading-relaxed">
             To become a globally recognized architecture studio known for
             minimal, timeless and sustainable design solutions.
@@ -127,10 +125,10 @@ export default function AboutPage() {
       {/* STATS */}
       <section className="max-w-5xl mx-auto px-6 py-28 grid grid-cols-2 md:grid-cols-4 text-center gap-10">
         {[
-          ["12+", "Years Experience"],
-          ["80+", "Projects"],
-          ["25+", "Clients"],
-          ["10+", "Awards"],
+          ["60+", "Нийт барилгын Төслийн удирдлага, зөвлөх үйлчилгээ"],
+          ["122+", "Манай ажилтнууд"],
+          ["140+", "Олон улсын стандарт, мэргэжлийн чанар хангасан ажиллагаа"],
+          ["31+", "Бодит Бүтээн байгуулалтууд"],
         ].map(([num, label], i) => (
           <Reveal key={i} direction="up" delay={i * 120}>
             <p className="text-4xl font-extralight">{num}</p>

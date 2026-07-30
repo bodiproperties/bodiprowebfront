@@ -104,20 +104,20 @@ const en = {
     label: 'GET IN TOUCH',
     heading: "Let's discuss your\nnext project",
 
-    email: 'studio@vossarchitects.com',
+    email: 'bodiproperties@bodigroup.mn',
 
     offices: [
       {
-        city: 'STOCKHOLM',
-        address: 'Strandvagen 7B\n11456 Stockholm\nSweden',
-        phone: '+46 8 123 456 78',
+        city: 'МОНГОЛ УЛС',
+        address: 'Улаанбаатар хот\nБаянзүрх дүүрэг, 7-р хороо, Их тойруу, 33р байрны өргөтгөл',
+        phone: '+976 77 72 27 27',
       },
     ],
   },
 
   footer: {
     tagline:
-      'Award-winning architecture studio based in Stockholm and Copenhagen.',
+      'Бодит Амжилтын Төлөө',
 
     navigation: 'NAVIGATION',
 
@@ -161,15 +161,15 @@ export const translations: Record<Language, Translations> = {
     },
 
     hero: {
-      tagline: '2003 ОН',
-      heading: 'Орчныг бүтээх архитектур',
+      tagline: '2026 ОН',
+      heading: 'БАРИЛГЫН САЛБАРТАА МАНЛАЙЛАГЧ',
       scroll: 'ДООШ ГҮЙЛГЭХ',
     },
 
     projects: {
       ...en.projects,
 
-      label: 'СОНГОСОН ТӨСЛҮҮД',
+      label: 'ШИНЭ ТӨСЛҮҮД',
       heading: 'Төслүүд',
       count: '(04) Төсөл',
       viewProject: 'ТӨСӨЛ ҮЗЭХ',

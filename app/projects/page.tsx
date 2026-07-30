@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { projects } from "@/lib/data";
 import { ProjectModal } from "@/components/molecules/ProjectModal";
+import { Genplan } from "@/components/molecules/Genplan";
 
 /* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
 function Reveal({
@@ -57,6 +58,111 @@ function Reveal({
 }
 
 const tabs = ["All", "Interior", "Apartment", "Office", "Garden", "Construction"];
+
+const GENPLAN_PLOTS = [
+  {
+    id: 1,
+    x: 22,
+    y: 68,
+    status: "available" as const,
+    title: "Block 1 · Villa 1",
+    area: "320 м²",
+    price: "$450,000",
+    heroImage: "/images/villa1-hero.jpg",
+    description:
+      "3 давхар, том цонхтой, өмнөх талдаа хаалттай терраст luxury villa. Байгалийн гэрэл, орчин vеийн загварыг хослуулсан.",
+    rooms: [
+      {
+        title: "Зочны өрөө",
+        text: "Өндөр таазтай, том цонхтой, гэрэлтэй зочны өрөө нь гэр бvлийн цуглаанд тохиромжтой.",
+        image: "/images/villa1-living.jpg",
+      },
+      {
+        title: "Гал тогоо",
+        text: "Орчин vеийн тоног төхөөрөмжтэй, том island-тай нээлттэй гал тогоо.",
+        image: "/images/villa1-kitchen.jpg",
+      },
+      {
+        title: "Унтлагын өрөө",
+        text: "Master bedroom нь өөрийн угаалгын өрөөтэй, гарцтай терраст.",
+        image: "/images/villa1-bedroom.jpg",
+      },
+      {
+        title: "Давхрын төлөвлөгөө",
+        text: "Villa-ийн бvтэц, өрөөнvvдийн байршил, талбайн тооцоо.",
+        image: "/images/villa1-floorplan.jpg",
+      },
+    ],
+  },
+  {
+    id: 2,
+    x: 30,
+    y: 46,
+    status: "reserved" as const,
+    title: "Block 1 · Villa 2",
+    area: "280 м²",
+    price: "$450,000",
+    heroImage: "/images/villa1-hero.jpg",
+    description:
+      "3 давхар, том цонхтой, өмнөх талдаа хаалттай терраст luxury villa. Байгалийн гэрэл, орчин vеийн загварыг хослуулсан.",
+    rooms: [
+      {
+        title: "Зочны өрөө",
+        text: "Өндөр таазтай, том цонхтой, гэрэлтэй зочны өрөө нь гэр бvлийн цуглаанд тохиромжтой.",
+        image: "/images/villa1-living.jpg",
+      },
+      {
+        title: "Гал тогоо",
+        text: "Орчин vеийн тоног төхөөрөмжтэй, том island-тай нээлттэй гал тогоо.",
+        image: "/images/villa1-kitchen.jpg",
+      },
+      {
+        title: "Унтлагын өрөө",
+        text: "Master bedroom нь өөрийн угаалгын өрөөтэй, гарцтай терраст.",
+        image: "/images/villa1-bedroom.jpg",
+      },
+      {
+        title: "Давхрын төлөвлөгөө",
+        text: "Villa-ийн бvтэц, өрөөнvvдийн байршил, талбайн тооцоо.",
+        image: "/images/villa1-floorplan.jpg",
+      },
+    ],
+  },
+  {
+    id: 3,
+    x: 45,
+    y: 25,
+    status: "sold" as const,
+    title: "Block 1 · Villa 1",
+    area: "320 м²",
+    price: "$450,000",
+    heroImage: "/images/villa1-hero.jpg",
+    description:
+      "3 давхар, том цонхтой, өмнөх талдаа хаалттай терраст luxury villa. Байгалийн гэрэл, орчин vеийн загварыг хослуулсан.",
+    rooms: [
+      {
+        title: "Зочны өрөө",
+        text: "Өндөр таазтай, том цонхтой, гэрэлтэй зочны өрөө нь гэр бvлийн цуглаанд тохиромжтой.",
+        image: "/images/villa1-living.jpg",
+      },
+      {
+        title: "Гал тогоо",
+        text: "Орчин vеийн тоног төхөөрөмжтэй, том island-тай нээлттэй гал тогоо.",
+        image: "/images/villa1-kitchen.jpg",
+      },
+      {
+        title: "Унтлагын өрөө",
+        text: "Master bedroom нь өөрийн угаалгын өрөөтэй, гарцтай терраст.",
+        image: "/images/villa1-bedroom.jpg",
+      },
+      {
+        title: "Давхрын төлөвлөгөө",
+        text: "Villa-ийн бvтэц, өрөөнvvдийн байршил, талбайн тооцоо.",
+        image: "/images/villa1-floorplan.jpg",
+      },
+    ],
+  },
+];
 
 export default function ProjectsSection() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -152,51 +258,59 @@ export default function ProjectsSection() {
           </div>
         </section>
 
-        {/* GRID */}
-        <section className="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-12">
-          {filteredProjects.map((project, i) => (
-            <Reveal key={project.id} direction={i % 2 === 0 ? "left" : "right"}>
-              <button
-                onClick={() => setSelectedIndex(projects.indexOf(project))}
-                className="group w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
-                aria-label={`View ${project.title}`}
-              >
-                {/* IMAGE */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/25 transition" />
-                  <div className="absolute bottom-7 left-7 opacity-0 group-hover:opacity-100 transition duration-500 cursor-pointer">
-                    <p className="text-white text-xs tracking-[0.3em] uppercase">
-                      View Project →
-                    </p>
-                  </div>
-                </div>
-
-                {/* INFO */}
-                <div className="mt-6 flex justify-between">
-                  <div>
-                    <h3 className="text-2xl font-extralight group-hover:tracking-wide transition">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-neutral-500">
-                      {project.location}
-                    </p>
-                  </div>
-                  <span className="text-xs tracking-[0.3em] text-neutral-400">
-                    {project.year}
-                  </span>
-                </div>
-
-                <div className="mt-5 h-px w-0 bg-black group-hover:w-28 transition-all duration-500" />
-              </button>
+       {/* GRID эсвэл GENPLAN (Construction сонгогдвол) */}
+        {activeTab === "Construction" ? (
+          <section className="max-w-6xl mx-auto px-8">
+            <Reveal direction="up">
+              <Genplan image="/images/genplan.jpg" plots={GENPLAN_PLOTS} />
             </Reveal>
-          ))}
-        </section>
+          </section>
+        ) : (
+          <section className="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-12">
+            {filteredProjects.map((project, i) => (
+              <Reveal key={project.id} direction={i % 2 === 0 ? "left" : "right"}>
+                <button
+                  onClick={() => setSelectedIndex(projects.indexOf(project))}
+                  className="group w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
+                  aria-label={`View ${project.title}`}
+                >
+                  {/* IMAGE */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/25 transition" />
+                    <div className="absolute bottom-7 left-7 opacity-0 group-hover:opacity-100 transition duration-500 cursor-pointer">
+                      <p className="text-white text-xs tracking-[0.3em] uppercase">
+                        View Project →
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* INFO */}
+                  <div className="mt-6 flex justify-between">
+                    <div>
+                      <h3 className="text-2xl font-extralight group-hover:tracking-wide transition">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-neutral-500">
+                        {project.location}
+                      </p>
+                    </div>
+                    <span className="text-xs tracking-[0.3em] text-neutral-400">
+                      {project.year}
+                    </span>
+                  </div>
+
+                  <div className="mt-5 h-px w-0 bg-black group-hover:w-28 transition-all duration-500" />
+                </button>
+              </Reveal>
+            ))}
+          </section>
+        )}
 
         {/* QUOTE SECTION */}
         <section className="max-w-5xl mx-auto px-8 py-36 text-center">
