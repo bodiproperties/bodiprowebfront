@@ -58,26 +58,26 @@ function Reveal({
 const services = [
   {
     slug: "architecture",
-    title: "Architecture Design",
-    desc: "From concept to construction, we design spaces that balance function, form, and emotion.",
+    title: "Барилгын зураг төсөл",
+    desc: "Манай компани нь төлөвлөлт ба судалгаа, Эх загвар боловсруулах, Техникийн зураг төсөл, Зөвшөөрөл авах, Барилгын ажил эхлүүлэх гэсэн дарааллыг баримталдаг.",
     img: "/images/4.jpg",
   },
   {
     slug: "interior",
-    title: "Interior Design",
-    desc: "We craft interior environments that feel minimal, warm, and human-centered.",
+    title: "Геодезын хэмжилт, зураглал",
+    desc: "Барилгын геодезын хэмжилт, зураглал нь барилга байгууламжийн угсралт, ашиглалт, засварын үе шатанд хийгддэг чухал ажил юм. Энэ нь барилгын тэнхлэг, өндрийг нарийвчлалтайгаар тодорхойлох, талбайн дэвсгэр зураг гаргах, инженерийн шугаман сүлжээний байршлыг тодорхойлох зэрэг ажлуудыг хийдэг.",
     img: "/images/7.jpg",
   },
   {
     slug: "urban",
-    title: "Urban Planning",
-    desc: "Large-scale spatial strategies that connect architecture with environment and society.",
+    title: "Барилгын менежмент",
+    desc: "Барилга угсралтын аливаа ажлыг амжилттай дуусгах нь төслийн үр дүнтэй менежментээр хэрэгждэг учир төслийг ашигтай байлгах зорилгоор бүх боломжийг ашиглан хэрэгжүүлдэг.",
     img: "/images/8.jpg",
   },
   {
     slug: "consulting",
-    title: "Consulting",
-    desc: "Strategic design consulting for developers, brands, and architectural firms.",
+    title: "Зөвлөх үйлчилгээ",
+    desc: "Зөвлөх үйлчилгээ нь барилгын төслийн бүх үе шатанд мэргэжлийн зөвлөгөө, дэмжлэг үзүүлдэг. Энэ нь барилгын зураг төсөл боловсруулах, барилгын угсралтын ажил гүйцэтгэх, талбайн хяналт хийх, төслийн баримт бичиг боловсруулан ажилдаг. Барилгын үйл ажиллагаа эхлэх цэгээс дуусах цэг хүртэл хамт байдаг.",
     img: "/images/9.jpg",
   },
 ];
@@ -97,14 +97,13 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative max-w-6xl mx-auto w-full px-8 pb-20 text-white">
           <p className="text-xs tracking-[0.35em] uppercase text-[#F58220]">
-            Selected Work
+            Үйл ажиллагаа
           </p>
           <h1 className="mt-6 text-5xl md:text-7xl font-extralight leading-tight max-w-4xl">
-            Architecture that balances form, light and emotion.
+            Хэлбэр, гэрэл, мэдрэмжийн төгс тэнцвэр.
           </h1>
           <p className="mt-8 text-white/70 max-w-xl leading-relaxed">
-            A collection of residential, commercial and conceptual projects
-            designed with simplicity and timelessness.
+            “Бодь Пропертийз” ХХК нь Монгол Улсын барилгын салбарын хөгжилтэй хөл нийлүүлэн, чанартай бүтээн байгуулалтыг хэрэгжүүлэн ажиллаж байна. Манай баг туршлагатай инженерүүд, бүтээлч хамт олноос бүрдэж, инновац, ур чадварыг эрхэмлэн ажилладаг.
           </p>
         </div>
       </section>

@@ -5,8 +5,8 @@ import Image from "next/image";
 import { projects } from "@/lib/data";
 import { ProjectModal } from "@/components/molecules/ProjectModal";
 import { Genplan } from "@/components/molecules/Genplan";
+import { LandscapeMap } from "@/components/molecules/LandscapeMap";
 
-/* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
 function Reveal({
   children,
   direction = "up",
@@ -31,7 +31,7 @@ function Reveal({
           io.unobserve(entry.target);
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -41,8 +41,8 @@ function Reveal({
     direction === "left"
       ? "-translate-x-16 opacity-0"
       : direction === "right"
-      ? "translate-x-16 opacity-0"
-      : "translate-y-12 opacity-0";
+        ? "translate-x-16 opacity-0"
+        : "translate-y-12 opacity-0";
 
   return (
     <div
@@ -57,7 +57,14 @@ function Reveal({
   );
 }
 
-const tabs = ["All", "Interior", "Apartment", "Office", "Garden", "Construction"];
+const tabs = [
+  "All",
+  "Interior",
+  "Apartment",
+  "Office",
+  "Garden",
+  "Construction",
+];
 
 const GENPLAN_PLOTS = [
   {
@@ -164,6 +171,39 @@ const GENPLAN_PLOTS = [
   },
 ];
 
+const GARDEN_ZONES = [
+  {
+    id: 1,
+    x: 25,
+    y: 40,
+    category: "trees" as const,
+    title: "Модны цэцэрлэг",
+    stat: "40 төрлийн мод · 1,200 м²",
+    description: "Уугуул зvйлийн мод голлон тарьсан, сvvдэртэй амралтын бvс.",
+    heroImage: "/images/garden-trees-hero.jpg",
+    gallery: ["/images/garden-trees-1.jpg", "/images/garden-trees-2.jpg"],
+  },
+  {
+    id: 2,
+    x: 44,
+    y: 65,
+    category: "water" as const,
+    title: "Усан сан",
+    stat: "800 м² талбай",
+    description: "Тайван орчинтой хиймэл нуур, загас vржvvлдэг систем.",
+    heroImage: "/images/garden-water-hero.jpg",
+  },
+  {
+    id: 3,
+    x: 62,
+    y: 28,
+    category: "flowers" as const,
+    title: "Цэцгийн талбай",
+    stat: "15 төрлийн цэцэг · улирал бvр цэцэглэдэг",
+    heroImage: "/images/garden-flowers-hero.jpg",
+  },
+];
+
 export default function ProjectsSection() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const selected = selectedIndex !== null ? projects[selectedIndex] : null;
@@ -171,7 +211,7 @@ export default function ProjectsSection() {
 
   const handleNext = () => {
     setSelectedIndex((prev) =>
-      prev === null ? 0 : (prev + 1) % projects.length
+      prev === null ? 0 : (prev + 1) % projects.length,
     );
   };
 
@@ -202,14 +242,15 @@ export default function ProjectsSection() {
           <div className="absolute inset-0 bg-black/40" />
           <div className="relative max-w-6xl mx-auto w-full px-8 pb-20 text-white">
             <p className="text-xs tracking-[0.35em] uppercase text-[#F58220]">
-              Selected Work
+              Хэрэгжүүлсэн төслүүд
             </p>
             <h1 className="mt-6 text-5xl md:text-7xl font-extralight leading-tight max-w-4xl">
-              Architecture that balances form, light and emotion.
+              Цаг хугацааны шалгуурыг давах бүтээн байгуулалт.
             </h1>
             <p className="mt-8 text-white/70 max-w-xl leading-relaxed">
-              A collection of residential, commercial and conceptual projects
-              created through simplicity, proportion and timeless design.
+              Чанар, дизайн, инновацыг хослуулан үнэ цэнтэй бүтээн байгуулалтыг
+              бий болгож, харилцагчдынхаа итгэлийг даасан төслүүдийг хэрэгжүүлж
+              байна.
             </p>
           </div>
         </section>
@@ -258,17 +299,29 @@ export default function ProjectsSection() {
           </div>
         </section>
 
-       {/* GRID эсвэл GENPLAN (Construction сонгогдвол) */}
+        {/* GRID эсвэл GENPLAN (Construction сонгогдвол) */}
         {activeTab === "Construction" ? (
           <section className="max-w-6xl mx-auto px-8">
             <Reveal direction="up">
               <Genplan image="/images/genplan.jpg" plots={GENPLAN_PLOTS} />
             </Reveal>
           </section>
+        ) : activeTab === "Garden" ? (
+          <section className="max-w-6xl mx-auto px-8">
+            <Reveal direction="up">
+              <LandscapeMap
+                image="/images/garden-map.jpg"
+                zones={GARDEN_ZONES}
+              />
+            </Reveal>
+          </section>
         ) : (
           <section className="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-12">
             {filteredProjects.map((project, i) => (
-              <Reveal key={project.id} direction={i % 2 === 0 ? "left" : "right"}>
+              <Reveal
+                key={project.id}
+                direction={i % 2 === 0 ? "left" : "right"}
+              >
                 <button
                   onClick={() => setSelectedIndex(projects.indexOf(project))}
                   className="group w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black"

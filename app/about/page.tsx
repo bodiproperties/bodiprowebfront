@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { log } from "console";
 
 /* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
 function Reveal({
@@ -29,7 +28,7 @@ function Reveal({
           io.unobserve(entry.target);
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -39,8 +38,8 @@ function Reveal({
     direction === "left"
       ? "-translate-x-16 opacity-0"
       : direction === "right"
-      ? "translate-x-16 opacity-0"
-      : "translate-y-12 opacity-0";
+        ? "translate-x-16 opacity-0"
+        : "translate-y-12 opacity-0";
 
   return (
     <div
@@ -75,7 +74,7 @@ export default function AboutPage() {
             БИДНИЙ ТУХАЙ
           </p>
           <h1 className="mt-6 text-5xl md:text-7xl font-extralight text-white leading-tight max-w-4xl">
-            We design spaces that define modern living
+            Бүтээн байгуулалтаар ирээдүйг бүтээнэ.
           </h1>
         </div>
       </section>
@@ -89,7 +88,12 @@ export default function AboutPage() {
         </Reveal>
         <Reveal direction="right" delay={150}>
           <p className="mt-10 text-neutral-600 leading-relaxed text-center">
-            Бодь Пропертийз” ХХК нь анх 1997 онд үл хөдлөх хөрөнгө, барилга угсралтын ажлын төлөвлөлт, санхүүжилт, хэрэгжилтийг иж бүрнээр нь гүйцэтгэгч төслийн байгууллагын хэлбэрээр үйл ажиллагаа явуулж эхэлсэн. Байгуулагдсанаас хойш барилгын салбар цаашлаад улс, нийслэлийн их бүтээн байгуулалт, өнгө төрхөд бодитой хувь нэмэр оруулсан олон төслүүдийг амжилттай хэрэгжүүлсэн. 
+            Бодь Пропертийз” ХХК нь анх 1997 онд үл хөдлөх хөрөнгө, барилга
+            угсралтын ажлын төлөвлөлт, санхүүжилт, хэрэгжилтийг иж бүрнээр нь
+            гүйцэтгэгч төслийн байгууллагын хэлбэрээр үйл ажиллагаа явуулж
+            эхэлсэн. Байгуулагдсанаас хойш барилгын салбар цаашлаад улс,
+            нийслэлийн их бүтээн байгуулалт, өнгө төрхөд бодитой хувь нэмэр
+            оруулсан олон төслүүдийг амжилттай хэрэгжүүлсэн.
           </p>
         </Reveal>
       </section>
@@ -99,15 +103,18 @@ export default function AboutPage() {
         <Reveal direction="left">
           <h2 className="text-2xl font-light mb-4">Эрхэм зорлиго</h2>
           <p className="text-neutral-600 leading-relaxed">
-            To design functional and emotional spaces that improve the way
-            people live, work, and interact with their environment.
+            Бид чанар, инновац, тогтвортой хөгжлийг эрхэмлэн, хэрэглэгчдийн
+            хэрэгцээ, хүлээлтэд нийцсэн аюулгүй, үнэ цэнтэй бүтээн байгуулалтыг
+            хэрэгжүүлж, амьдрах болон ажиллах таатай орчныг бүрдүүлэхийг
+            зорьдог.
           </p>
         </Reveal>
         <Reveal direction="right" delay={150}>
           <h2 className="text-2xl font-light mb-4">Алсын хараа</h2>
           <p className="text-neutral-600 leading-relaxed">
-            To become a globally recognized architecture studio known for
-            minimal, timeless and sustainable design solutions.
+            Барилга, үл хөдлөх хөрөнгийн салбарт инновац, чанар, тогтвортой
+            хөгжлөөр манлайлан, Монголын ирээдүйн үнэ цэнтэй орон зайг бүтээх
+            тэргүүлэгч компани байна.
           </p>
         </Reveal>
       </section>
@@ -115,19 +122,29 @@ export default function AboutPage() {
       {/* IMAGE STRIP */}
       <section className="grid md:grid-cols-2">
         <div className="relative h-[60vh]">
-          <Image src="/images/3.jpg" alt="Interior" fill className="object-cover" />
+          <Image
+            src="/images/3.jpg"
+            alt="Interior"
+            fill
+            className="object-cover"
+          />
         </div>
         <div className="relative h-[60vh]">
-          <Image src="/images/6.jpg" alt="Exterior" fill className="object-cover" />
+          <Image
+            src="/images/6.jpg"
+            alt="Exterior"
+            fill
+            className="object-cover"
+          />
         </div>
       </section>
 
       {/* STATS */}
       <section className="max-w-5xl mx-auto px-6 py-28 grid grid-cols-2 md:grid-cols-4 text-center gap-10">
         {[
-          ["60+", "Нийт барилгын Төслийн удирдлага, зөвлөх үйлчилгээ"],
+          ["60+", "Төслийн удирдлага, зөвлөх үйлчилгээ"],
           ["122+", "Манай ажилтнууд"],
-          ["140+", "Олон улсын стандарт, мэргэжлийн чанар хангасан ажиллагаа"],
+          ["140+", "Олон улсын стандарт хангасан ажиллагаа"],
           ["31+", "Бодит Бүтээн байгуулалтууд"],
         ].map(([num, label], i) => (
           <Reveal key={i} direction="up" delay={i * 120}>
@@ -151,21 +168,28 @@ export default function AboutPage() {
         </Reveal>
         <Reveal direction="right" delay={150}>
           <p className="text-xs tracking-[0.35em] text-[#F58220] uppercase">
-            Director&apos;s Message
+            Захиралын&apos; мэндчилгээ
           </p>
           <h2 className="mt-6 text-4xl md:text-5xl font-extralight leading-tight">
-            Designing spaces with purpose and timeless value.
+            Манай байгууллагын цахим хуудсанд тавтай морилно уу.
           </h2>
           <p className="mt-8 text-neutral-600 leading-relaxed">
-            We approach every project with dedication, creativity, and respect
-            for the people who will inhabit these spaces. Our mission is to
-            deliver architecture that combines beauty, functionality, and
-            sustainability for generations to come.
+            1997 онд байгуулагдсан Бодь Пропертийз ХХК нь үл хөдлөх хөрөнгө,
+            барилга бүтээн байгуулалтын төслүүдийг төлөвлөлтөөс хэрэгжилт хүртэл
+            цогцоор нь хэрэгжүүлэн ажиллаж байна. Байгуулагдсан цагаасаа эхлэн
+            Монгол Улсын бүтээн байгуулалт, хөрөнгө оруулалтын салбарт үнэтэй
+            хувь нэмэр оруулж, чанар, инновац, мэргэжлийн ур чадвараараа олон
+            удаа шилдэг байгууллагаар шалгарсан. Манай чадварлаг хамт олон орчин
+            үеийн техник, технологийг ашиглан захиалагчдын хэрэгцээнд нийцсэн,
+            чанартай, найдвартай бүтээн байгуулалтыг хэрэгжүүлж, харилцагчдынхаа
+            итгэлийг хүлээсээр ирсэн. Бид цаашид ч хүний нөөц, инновац,
+            тогтвортой хөгжлийг эрхэмлэн, үнэ цэнтэй орон зай, бүтээн
+            байгуулалтыг бий болгохын төлөө тууштай ажиллах болно.
           </p>
           <div className="mt-10">
-            <p className="text-xl font-light">TEGSHBAYAR.B</p>
+            <p className="text-xl font-light">Б.ТЭГШБАЯР</p>
             <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mt-2">
-              Chief Executive Officer, Bodi Properties LLC
+              Бодь Пропертийз ХХК-н Гүйцэтгэх Захирал 
             </p>
           </div>
         </Reveal>
@@ -225,7 +249,9 @@ export default function AboutPage() {
             <p className="text-xs tracking-[0.3em] uppercase text-[#F58220]">
               Contact Us
             </p>
-            <h2 className="mt-4 text-3xl font-extralight">Start Your Project</h2>
+            <h2 className="mt-4 text-3xl font-extralight">
+              Start Your Project
+            </h2>
             <form className="mt-10 space-y-6">
               <input
                 type="text"
