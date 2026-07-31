@@ -37,7 +37,7 @@ export function JournalSection() {
                   </span>
                 </Link>
               </Reveal>
-            )
+            ),
           )}
           <div className="border-t border-neutral-200" />
         </div>

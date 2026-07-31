@@ -180,8 +180,8 @@ const GARDEN_ZONES = [
     title: "Модны цэцэрлэг",
     stat: "40 төрлийн мод · 1,200 м²",
     description: "Уугуул зvйлийн мод голлон тарьсан, сvvдэртэй амралтын бvс.",
-    heroImage: "/images/garden-trees-hero.jpg",
-    gallery: ["/images/garden-trees-1.jpg", "/images/garden-trees-2.jpg"],
+    heroImage: "/images/house.jpg",
+    gallery: ["/images/house.jpg", "/images/sp.jpg"],
   },
   {
     id: 2,
@@ -191,7 +191,8 @@ const GARDEN_ZONES = [
     title: "Усан сан",
     stat: "800 м² талбай",
     description: "Тайван орчинтой хиймэл нуур, загас vржvvлдэг систем.",
-    heroImage: "/images/garden-water-hero.jpg",
+    heroImage: "/images/news.jpg",
+    gallery: ["/images/house.jpg", "/images/sp.jpg"],
   },
   {
     id: 3,
@@ -200,7 +201,8 @@ const GARDEN_ZONES = [
     category: "flowers" as const,
     title: "Цэцгийн талбай",
     stat: "15 төрлийн цэцэг · улирал бvр цэцэглэдэг",
-    heroImage: "/images/garden-flowers-hero.jpg",
+    heroImage: "/images/buildingbg1.jpg",
+    gallery: ["/images/house.jpg", "/images/sp.jpg"],
   },
 ];
 

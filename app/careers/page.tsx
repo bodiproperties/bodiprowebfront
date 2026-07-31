@@ -16,7 +16,7 @@ export default function CareersPage() {
       {/* HERO */}
       <section className="relative h-[90vh] overflow-hidden flex items-end">
         <Image
-          src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=2000"
+          src="/images/hr.jpg"
           alt=""
           fill
           priority
@@ -28,7 +28,7 @@ export default function CareersPage() {
             Careers
           </p>
           <h1 className="mt-6 text-5xl md:text-7xl font-extralight max-w-4xl leading-tight">
-            Build spaces. Shape communities. Grow with us.
+            Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.
           </h1>
         </div>
       </section>
