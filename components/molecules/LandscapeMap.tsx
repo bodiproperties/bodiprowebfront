@@ -114,9 +114,9 @@ export function LandscapeMap({ image, zones }: Props) {
   const rgb = active ? CATEGORY_RGB[active.category] : "245,130,32";
 
   const cardImages = active
-    ? [active.heroImage, ...(active.gallery || [])].filter(
-        (v): v is string => Boolean(v),
-      ).slice(0, 3)
+    ? [active.heroImage, ...(active.gallery || [])]
+        .filter((v): v is string => Boolean(v))
+        .slice(0, 3)
     : [];
 
   // Staggered animation-ий хувийн класс vvсгэгч
@@ -141,7 +141,9 @@ export function LandscapeMap({ image, zones }: Props) {
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-neutral-300">
             <ImageOff className="h-8 w-8" />
-            <p className="text-xs uppercase tracking-[0.2em]">Зураг олдсонгvй</p>
+            <p className="text-xs uppercase tracking-[0.2em]">
+              Зураг олдсонгvй
+            </p>
           </div>
         )}
 
@@ -170,7 +172,10 @@ export function LandscapeMap({ image, zones }: Props) {
       {/* Легенд */}
       <div className="mt-4 flex flex-wrap gap-5">
         {(Object.keys(CATEGORY_LABEL) as Zone["category"][]).map((c) => (
-          <span key={c} className="inline-flex items-center gap-2 text-xs text-neutral-500">
+          <span
+            key={c}
+            className="inline-flex items-center gap-2 text-xs text-neutral-500"
+          >
             <span className={`h-2.5 w-2.5 rounded-full ${CATEGORY_COLOR[c]}`} />
             {CATEGORY_LABEL[c]}
           </span>
@@ -182,8 +187,14 @@ export function LandscapeMap({ image, zones }: Props) {
           animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         @keyframes pulse-ring {
-          0% { transform: scale(1); opacity: 0.6; }
-          100% { transform: scale(2.4); opacity: 0; }
+          0% {
+            transform: scale(1);
+            opacity: 0.6;
+          }
+          100% {
+            transform: scale(2.4);
+            opacity: 0;
+          }
         }
       `}</style>
 
@@ -204,7 +215,10 @@ export function LandscapeMap({ image, zones }: Props) {
               <div
                 ref={scrollRef}
                 className="h-full w-full overflow-y-auto"
-                style={{ opacity: open ? 1 : 0, transition: "opacity 300ms ease 100ms" }}
+                style={{
+                  opacity: open ? 1 : 0,
+                  transition: "opacity 300ms ease 100ms",
+                }}
               >
                 {/* ===== HERO ===== */}
                 <div className="relative min-h-screen w-full">
@@ -251,7 +265,9 @@ export function LandscapeMap({ image, zones }: Props) {
                           ...stagger(0),
                         }}
                       >
-                        <span className={`h-1.5 w-1.5 rounded-full ${CATEGORY_COLOR[active.category]}`} />
+                        <span
+                          className={`h-1.5 w-1.5 rounded-full ${CATEGORY_COLOR[active.category]}`}
+                        />
                         {CATEGORY_LABEL[active.category]}
                       </div>
 
@@ -272,7 +288,10 @@ export function LandscapeMap({ image, zones }: Props) {
                       )}
 
                       {/* Icon chip-той статистик мөр */}
-                      <div className="mt-10 flex flex-wrap gap-6" style={stagger(240)}>
+                      <div
+                        className="mt-10 flex flex-wrap gap-6"
+                        style={stagger(240)}
+                      >
                         <div className="flex items-center gap-3">
                           <span
                             className="flex h-9 w-9 items-center justify-center rounded-full"
@@ -292,7 +311,9 @@ export function LandscapeMap({ image, zones }: Props) {
                             >
                               <TreePine className="h-4 w-4 text-white" />
                             </span>
-                            <span className="text-sm text-white/80">Уугуул зvйл</span>
+                            <span className="text-sm text-white/80">
+                              Уугуул зvйл
+                            </span>
                           </div>
                         )}
                         {active.category === "water" && (
@@ -303,7 +324,9 @@ export function LandscapeMap({ image, zones }: Props) {
                             >
                               <Droplets className="h-4 w-4 text-white" />
                             </span>
-                            <span className="text-sm text-white/80">Тайван орчин</span>
+                            <span className="text-sm text-white/80">
+                              Тайван орчин
+                            </span>
                           </div>
                         )}
                         <div className="flex items-center gap-3">
@@ -313,7 +336,9 @@ export function LandscapeMap({ image, zones }: Props) {
                           >
                             <Leaf className="h-4 w-4 text-white" />
                           </span>
-                          <span className="text-sm text-white/80">Байгальд ээлтэй</span>
+                          <span className="text-sm text-white/80">
+                            Байгальд ээлтэй
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -348,7 +373,12 @@ export function LandscapeMap({ image, zones }: Props) {
                           }}
                         >
                           <div className="relative h-32 w-full">
-                            <Image src={cardImages[1]} alt="" fill className="object-cover" />
+                            <Image
+                              src={cardImages[1]}
+                              alt=""
+                              fill
+                              className="object-cover"
+                            />
                           </div>
                           <div className="p-4">
                             <p className="text-xs uppercase tracking-[0.15em] text-white/50">
@@ -371,7 +401,12 @@ export function LandscapeMap({ image, zones }: Props) {
                           }}
                         >
                           <div className="relative h-32 w-full">
-                            <Image src={cardImages[2]} alt="" fill className="object-cover" />
+                            <Image
+                              src={cardImages[2]}
+                              alt=""
+                              fill
+                              className="object-cover"
+                            />
                           </div>
                           <div className="p-4">
                             <p className="text-xs uppercase tracking-[0.15em] text-white/50">
@@ -416,7 +451,12 @@ export function LandscapeMap({ image, zones }: Props) {
                           imageLeft ? "" : "md:order-2"
                         }`}
                       >
-                        <Image src={room.image} alt={room.title} fill className="object-cover" />
+                        <Image
+                          src={room.image}
+                          alt={room.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                       <div className={imageLeft ? "" : "md:order-1"}>
                         <p className="text-xs uppercase tracking-[0.25em] text-[#F58220]">
