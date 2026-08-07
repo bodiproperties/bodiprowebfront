@@ -11,8 +11,9 @@ const en = {
   },
 
   hero: {
-    tagline: 'EST. 2003 — STOCKHOLM & COPENHAGEN',
-    heading: 'Architecture that shapes\nhow we experience\nthe world',
+    tagline: '2026',
+    heading: 'A Leader in the\nConstruction\nIndustry',
+    outlineIndex: 1,
     scroll: 'SCROLL TO EXPLORE',
   },
 
@@ -109,7 +110,7 @@ const en = {
     offices: [
       {
         city: 'МОНГОЛ УЛС',
-        address: 'Улаанбаатар хот\nБаянзүрх дүүрэг, 7-р хороо, Их тойруу, 33р байрны өргөтгөл',
+        address: 'Улаанбаатар хот\nБаянзvрх дvvрэг, 7-р хороо, Их тойруу, 33р байрны өргөтгөл',
         phone: '+976 77 72 27 27',
       },
     ],
@@ -153,32 +154,33 @@ export const translations: Record<Language, Translations> = {
 
     nav: {
       brand: 'БОДЬ ПРОПЕРТИЙЗ',
-      projects: 'ТӨСЛҮҮД',
+      projects: 'ТӨСЛvvД',
       studio: 'СТУДИ',
       approach: 'ХАНДЛАГА',
-      journal: 'СЭТГҮҮЛ',
+      journal: 'СЭТГvvЛ',
       contact: 'ХОЛБОО БАРИХ',
     },
 
     hero: {
-      tagline: '2026 ОН',
-      heading: 'БАРИЛГЫН САЛБАРТАА МАНЛАЙЛАГЧ',
-      scroll: 'ДООШ ГҮЙЛГЭХ',
+      tagline: '2026',
+      heading: 'БАРИЛГЫН\nСАЛБАРТАА\nМАНЛАЙЛАГЧ',
+      outlineIndex: 2,
+      scroll: 'Доош',
     },
 
     projects: {
       ...en.projects,
 
-      label: 'ШИНЭ ТӨСЛҮҮД',
+      label: 'Шинэ Төслүүд',
       heading: 'Төслүүд',
       count: '(04) Төсөл',
-      viewProject: 'ТӨСӨЛ ҮЗЭХ',
+      viewProject: 'ТӨСӨЛ vЗЭХ',
       close: 'ХААХ',
     },
 
     quote: {
       text: 'Архитектур нь цаг хугацааг даван туулах ёстой.',
-      author: 'ҮҮСГЭН БАЙГУУЛАГЧ',
+      author: 'vvСГЭН БАЙГУУЛАГЧ',
     },
 
     studio: {
@@ -189,12 +191,12 @@ export const translations: Record<Language, Translations> = {
       heading:
         'Архитектур бол олон нийтийн урлагийн хамгийн дотно хэлбэр',
 
-      p1: 'Бодь Пропертийз нь чанартай орон зай бүтээх зорилготой байгуулагдсан.',
+      p1: 'Бодь Пропертийз нь чанартай орон зай бvтээх зорилготой байгуулагдсан.',
 
-      p2: 'Бид орчин, гэрэл, хүний хэрэглээг судалж архитектур бүтээдэг.',
+      p2: 'Бид орчин, гэрэл, хvний хэрэглээг судалж архитектур бvтээдэг.',
 
       stats: {
-        projects: 'ХЭРЭГЖҮҮЛСЭН ТӨСӨЛ',
+        projects: 'ХЭРЭГЖvvЛСЭН ТӨСӨЛ',
         awards: 'ШАГНАЛ',
         years: 'ТУРШЛАГА',
       },
@@ -215,7 +217,7 @@ export const translations: Record<Language, Translations> = {
 
       social: 'СОШИАЛ',
 
-      rights: '©2026 Бодь Пропертийз. Бүх эрх хуулиар хамгаалагдсан.',
+      rights: '©2026 Бодь Пропертийз. Бvх эрх хуулиар хамгаалагдсан.',
 
       location: 'Улаанбаатар',
     },

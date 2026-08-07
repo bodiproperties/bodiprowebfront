@@ -79,7 +79,7 @@ export default function NewsPage() {
             Latest Articles
           </p>
           <h2 className="mt-5 text-4xl md:text-6xl font-extralight">
-            News &amp; Journal
+            Мэдээ &amp; мэдээлэл
           </h2>
         </Reveal>
       </section>

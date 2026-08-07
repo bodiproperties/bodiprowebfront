@@ -55,7 +55,7 @@ export function StudioSection() {
           observer.disconnect(); // зөвхөн нэг удаа тоолно
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(el);
@@ -63,7 +63,10 @@ export function StudioSection() {
   }, []);
 
   return (
-    <section id="studio" className="py-24 px-8 bg-neutral-900 text-white overflow-hidden">
+    <section
+      id="studio"
+      className="py-24 px-8 bg-neutral-900 text-white overflow-hidden"
+    >
       <div className="max-w-[1400px] mx-auto">
         <Reveal direction="left">
           <SectionLabel text={t.studio.label} />

@@ -14,7 +14,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | null>(null)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Language>('EN')
+  const [lang, setLang] = useState<Language>('MN')
   const [mounted, setMounted] = useState(false)
 
   // LOAD saved language

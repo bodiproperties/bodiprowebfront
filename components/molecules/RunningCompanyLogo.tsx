@@ -75,7 +75,11 @@ export default function RunningCompanyLogo() {
         <div className="marquee-mask w-full overflow-hidden">
           <div className="marquee-track">
             {[0, 1, 2, 3].map((groupIdx) => (
-              <div key={groupIdx} className="marquee-group" aria-hidden={groupIdx > 0}>
+              <div
+                key={groupIdx}
+                className="marquee-group"
+                aria-hidden={groupIdx > 0}
+              >
                 {logos.map((logo, i) => (
                   <div key={`${groupIdx}-${i}`} className="marquee-logo-wrap">
                     <Image

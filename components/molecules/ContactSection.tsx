@@ -9,7 +9,10 @@ export function ContactSection() {
   const lines = t.contact.heading.split("\n");
 
   return (
-    <section id="contact" className="py-24 px-8 bg-neutral-900 text-white overflow-hidden">
+    <section
+      id="contact"
+      className="py-24 px-8 bg-neutral-900 text-white overflow-hidden"
+    >
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Зүүн тал: контент */}
@@ -43,13 +46,17 @@ export function ContactSection() {
                     </p>
                     <p className="text-neutral-400">{office.phone}</p>
                   </div>
-                )
+                ),
               )}
             </div>
           </Reveal>
 
           {/* Баруун тал: зураг (hover дээр өнгөтэй болно) */}
-          <Reveal direction="right" delay={150} className="relative overflow-hidden">
+          <Reveal
+            direction="right"
+            delay={150}
+            className="relative overflow-hidden"
+          >
             <img
               src="/images/7.jpg"
               alt=""
