@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { RoadmapSection } from "@/components/molecules/RoadmapSection";
 
 /* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
 function Reveal({
@@ -196,29 +197,8 @@ export default function AboutPage() {
       </section>
 
       {/* ROADMAP */}
-      <section className="max-w-5xl mx-auto px-6 md:px-16 lg:px-24 pb-10">
-        <Reveal direction="left">
-          <h2 className="text-2xl font-light mb-10">Roadmap</h2>
-        </Reveal>
-        <div className="space-y-8">
-          {[
-            ["2024", "Studio foundation and first residential projects"],
-            ["2025", "Expansion into international architecture market"],
-            ["2026", "Launch of sustainable smart architecture division"],
-            ["2027", "Global collaborations and landmark projects"],
-          ].map(([year, text], i) => (
-            <Reveal
-              key={i}
-              direction={i % 2 === 0 ? "left" : "right"}
-              delay={i * 100}
-            >
-              <div className="flex gap-10 border-b border-neutral-200 pb-6">
-                <span className="text-sm text-neutral-400 w-20">{year}</span>
-                <p className="text-neutral-700">{text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      <section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-10">
+        <RoadmapSection lang="mn" />
       </section>
 
       {/* CTA */}

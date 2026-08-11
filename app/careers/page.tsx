@@ -1,7 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import { OpenPositionsSection } from "@/components/molecules/OpenPositionsSection";
+import { HiringProcessSection } from "@/components/molecules/HiringProcessSection";
+import { CareersHero } from "@/components/molecules/CareersHero";
+import { TestimonialsSection } from "@/components/molecules/TestimonialsSection";
 
 const positions = [
   { title: "Senior Architect", location: "Ulaanbaatar", type: "Full Time" },
@@ -10,28 +16,77 @@ const positions = [
   { title: "Civil Engineer", location: "Ulaanbaatar", type: "Full Time" },
 ];
 
+const HERO_SLIDES = [
+  {
+    image: "/images/hr.jpg",
+    label: "Careers",
+    desc: "Чадварлаг хүмүүсээс vнэ цэнтэй бүтээн байгуулалт эхэлдэг.",
+  },
+  {
+    image: "/images/1.jpg",
+    label: "Careers",
+    desc: "Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.",
+  },
+  {
+    image: "/images/2.jpg",
+    label: "Careers",
+    desc: "Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.",
+  },
+  {
+    image: "/images/3.jpg",
+    label: "Careers",
+    desc: "Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.",
+  },
+  {
+    image: "/images/4.jpg",
+    label: "Careers",
+    desc: "Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.",
+  },
+  {
+    image: "/images/5.jpg",
+    label: "Careers",
+    desc: "Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.",
+  },
+];
+
+// Дэлгэцийн хэмжээнээс хамаарч карт/зай/харагдах тоог тохируулна
+function useResponsiveCarousel() {
+  const [config, setConfig] = useState({
+    cardW: 150,
+    cardH: 200,
+    gap: 16,
+    visible: 3,
+  });
+
+  useEffect(() => {
+    const compute = () => {
+      const w = window.innerWidth;
+      if (w < 480) {
+        setConfig({ cardW: 78, cardH: 104, gap: 8, visible: 2 });
+      } else if (w < 640) {
+        setConfig({ cardW: 92, cardH: 122, gap: 10, visible: 2 });
+      } else if (w < 768) {
+        setConfig({ cardW: 108, cardH: 144, gap: 12, visible: 3 });
+      } else if (w < 1024) {
+        setConfig({ cardW: 128, cardH: 170, gap: 14, visible: 3 });
+      } else {
+        setConfig({ cardW: 150, cardH: 200, gap: 16, visible: 3 });
+      }
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+
+  return config;
+}
+
+
+
 export default function CareersPage() {
   return (
     <main className="bg-white text-[#4D4C4D] overflow-hidden">
-      {/* HERO */}
-      <section className="relative h-[90vh] overflow-hidden flex items-end">
-        <Image
-          src="/images/hr.jpg"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative max-w-7xl mx-auto px-8 pb-24 text-white">
-          <p className="uppercase tracking-[0.35em] text-sm text-[#F58220]">
-            Careers
-          </p>
-          <h1 className="mt-6 text-5xl md:text-7xl font-extralight max-w-4xl leading-tight">
-            Чадварлаг хүмүүсээс үнэ цэнтэй бүтээн байгуулалт эхэлдэг.
-          </h1>
-        </div>
-      </section>
+      <CareersHero lang="en" />
 
       {/* INTRO */}
       <section className="max-w-6xl mx-auto px-8 py-28">
@@ -44,7 +99,11 @@ export default function CareersPage() {
               We believe great buildings are created by great people.
             </h2>
           </Reveal>
-          <Reveal direction="right" delay={150} className="space-y-8 text-lg leading-relaxed">
+          <Reveal
+            direction="right"
+            delay={150}
+            className="space-y-8 text-lg leading-relaxed"
+          >
             <p>
               At Bodi Properties, we bring together architects, engineers,
               designers and construction professionals who share a passion for
@@ -85,51 +144,13 @@ export default function CareersPage() {
       </section>
 
       {/* OPEN POSITIONS */}
-      <section className="max-w-6xl mx-auto px-8 py-28">
-        <Reveal direction="left">
-          <p className="uppercase tracking-[0.3em] text-sm text-[#F58220]">
-            Open Positions
-          </p>
-          <h2 className="mt-6 text-4xl font-extralight text-neutral-900 mb-16">
-            Current Opportunities
-          </h2>
-        </Reveal>
-        <div className="space-y-8">
-          {positions.map((job, i) => (
-            <Reveal key={i} direction={i % 2 === 0 ? "left" : "right"} delay={i * 80}>
-              <div className="border-b border-neutral-200 pb-8 flex justify-between items-center">
-                <div>
-                  <h3 className="text-2xl text-neutral-900 font-light">
-                    {job.title}
-                  </h3>
-                  <p className="mt-3 text-neutral-500">
-                    {job.location} · {job.type}
-                  </p>
-                </div>
-                <button className="border border-neutral-900 px-8 py-3 hover:bg-black hover:text-white transition cursor-pointer">
-                  Apply
-                </button>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      <section className="max-w-7xl mx-auto px-8 py-28">
+        <OpenPositionsSection lang="en" onSelectPosition={() => {}} />
       </section>
 
       {/* PROCESS */}
       <section className="bg-neutral-900 text-white py-28 px-8">
-        <div className="max-w-6xl mx-auto">
-          <Reveal direction="left">
-            <h2 className="text-4xl font-extralight mb-20">Hiring Process</h2>
-          </Reveal>
-          <div className="grid md:grid-cols-4 gap-14">
-            {["Application", "Interview", "Assessment", "Offer"].map((step, i) => (
-              <Reveal key={i} direction="up" delay={i * 120}>
-                <div className="text-6xl text-white/20 mb-6">0{i + 1}</div>
-                <h3 className="text-xl font-light">{step}</h3>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+        <HiringProcessSection lang="en" />
       </section>
 
       {/* CTA */}
@@ -145,6 +166,10 @@ export default function CareersPage() {
             Contact HR
           </button>
         </Reveal>
+      </section>
+      {/* CTA */}
+      <section className="max-w-7xl mx-auto text-center py-32 px-8">
+        <TestimonialsSection lang="en" />
       </section>
     </main>
   );
