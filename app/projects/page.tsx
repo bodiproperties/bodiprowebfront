@@ -6,6 +6,7 @@ import { projects } from "@/lib/data";
 import { ProjectModal } from "@/components/molecules/ProjectModal";
 import { Genplan } from "@/components/molecules/Genplan";
 import { LandscapeMap } from "@/components/molecules/LandscapeMap";
+import ProjectsHero from "@/components/molecules/ProjectsHero";
 
 function Reveal({
   children,
@@ -233,29 +234,7 @@ export default function ProjectsSection() {
     <>
       <main className="bg-white text-black overflow-hidden">
         {/* HERO */}
-        <section className="relative h-[85vh] flex items-end overflow-hidden">
-          <Image
-            src="/images/12.jpg"
-            alt="Projects Hero"
-            fill
-            priority
-            className="object-cover scale-105"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="relative max-w-6xl mx-auto w-full px-8 pb-20 text-white">
-            <p className="text-xs tracking-[0.35em] uppercase text-[#F58220]">
-              Хэрэгжүүлсэн төслүүд
-            </p>
-            <h1 className="mt-6 text-5xl md:text-7xl font-extralight leading-tight max-w-4xl">
-              Цаг хугацааны шалгуурыг давах бүтээн байгуулалт.
-            </h1>
-            <p className="mt-8 text-white/70 max-w-xl leading-relaxed">
-              Чанар, дизайн, инновацыг хослуулан үнэ цэнтэй бүтээн байгуулалтыг
-              бий болгож, харилцагчдынхаа итгэлийг даасан төслүүдийг хэрэгжүүлж
-              байна.
-            </p>
-          </div>
-        </section>
+        <ProjectsHero />
 
         {/* STATS */}
         <section className="max-w-6xl mx-auto px-8 py-24 grid md:grid-cols-4 gap-12 text-center">

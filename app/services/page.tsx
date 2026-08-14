@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ServicesHero from "@/components/molecules/ServiceHero";
 
 /* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
 function Reveal({
@@ -86,27 +87,7 @@ export default function ServicesPage() {
   return (
     <main className="bg-white text-black overflow-hidden">
       {/* HERO */}
-      <section className="relative h-[80vh] flex items-end overflow-hidden">
-        <Image
-          src="/images/8.jpg"
-          alt="Projects"
-          fill
-          priority
-          className="object-cover scale-105"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative max-w-6xl mx-auto w-full px-8 pb-20 text-white">
-          <p className="text-xs tracking-[0.35em] uppercase text-[#F58220]">
-            Үйл ажиллагаа
-          </p>
-          <h1 className="mt-6 text-5xl md:text-7xl font-extralight leading-tight max-w-4xl">
-            Хэлбэр, гэрэл, мэдрэмжийн төгс тэнцвэр.
-          </h1>
-          <p className="mt-8 text-white/70 max-w-xl leading-relaxed">
-            “Бодь Пропертийз” ХХК нь Монгол Улсын барилгын салбарын хөгжилтэй хөл нийлүүлэн, чанартай бүтээн байгуулалтыг хэрэгжүүлэн ажиллаж байна. Манай баг туршлагатай инженерүүд, бүтээлч хамт олноос бүрдэж, инновац, ур чадварыг эрхэмлэн ажилладаг.
-          </p>
-        </div>
-      </section>
+        <ServicesHero />
 
       {/* SERVICES */}
       <section className="max-w-6xl mx-auto px-6 md:px-16 lg:px-24 py-28 space-y-24">

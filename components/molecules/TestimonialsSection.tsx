@@ -6,7 +6,6 @@ import {
   Quote,
   ChevronLeft,
   ChevronRight,
-  Award,
   Building,
 } from "lucide-react";
 
@@ -37,7 +36,7 @@ export function TestimonialsSection({ lang }: TestimonialsSectionProps) {
       <div className="max-w-7xl mx-auto">
         <Reveal direction="left">
           <div className="flex items-center gap-3">
-            <span className="w-8 h-[2px] bg-[#F58220]"></span>
+            <span className="w-8 h-0.5 bg-[#F58220]"></span>
             <p className="uppercase tracking-[0.3em] text-xs sm:text-sm font-semibold text-[#F58220]">
               {lang === "mn" ? "Манай Хамт Олон" : "Life at Bodi"}
             </p>

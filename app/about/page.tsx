@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { RoadmapSection } from "@/components/molecules/RoadmapSection";
+import { Target, Eye, X, Send } from "lucide-react";
+import AboutHero from "@/components/molecules/AboutHero";
 
 /* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
 function Reveal({
@@ -62,22 +64,7 @@ export default function AboutPage() {
     <main className="bg-white text-black overflow-hidden">
       {/* HERO */}
       <section className="relative w-full h-[85vh] overflow-hidden">
-        <Image
-          src="/images/news.jpg"
-          alt="Architecture building"
-          fill
-          priority
-          className="object-cover scale-105"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
-          <p className="text-xs tracking-[0.35em] text-[#F58220] uppercase">
-            БИДНИЙ ТУХАЙ
-          </p>
-          <h1 className="mt-6 text-5xl md:text-7xl font-extralight text-white leading-tight max-w-4xl">
-            Бүтээн байгуулалтаар ирээдүйг бүтээнэ.
-          </h1>
-        </div>
+        <AboutHero />
       </section>
 
       {/* INTRO */}
@@ -89,34 +76,48 @@ export default function AboutPage() {
         </Reveal>
         <Reveal direction="right" delay={150}>
           <p className="mt-10 text-neutral-600 leading-relaxed text-center">
-            Бодь Пропертийз” ХХК нь анх 1997 онд үл хөдлөх хөрөнгө, барилга
-            угсралтын ажлын төлөвлөлт, санхүүжилт, хэрэгжилтийг иж бүрнээр нь
-            гүйцэтгэгч төслийн байгууллагын хэлбэрээр үйл ажиллагаа явуулж
+            Бодь Пропертийз" ХХК нь анх 1997 онд vл хөдлөх хөрөнгө, барилга
+            угсралтын ажлын төлөвлөлт, санхvvжилт, хэрэгжилтийг иж бvрнээр нь
+            гvйцэтгэгч төслийн байгууллагын хэлбэрээр vйл ажиллагаа явуулж
             эхэлсэн. Байгуулагдсанаас хойш барилгын салбар цаашлаад улс,
-            нийслэлийн их бүтээн байгуулалт, өнгө төрхөд бодитой хувь нэмэр
-            оруулсан олон төслүүдийг амжилттай хэрэгжүүлсэн.
+            нийслэлийн их бvтээн байгуулалт, өнгө төрхөд бодитой хувь нэмэр
+            оруулсан олон төслvvдийг амжилттай хэрэгжvvлсэн.
           </p>
         </Reveal>
       </section>
 
-      {/* MISSION / VISION */}
-      <section className="max-w-5xl mx-auto px-6 md:px-16 lg:px-24 py-20 grid md:grid-cols-2 gap-16">
+      {/* MISSION / VISION — bordered cards */}
+      <section className="max-w-5xl mx-auto px-6 md:px-16 lg:px-24 py-20 grid md:grid-cols-2 gap-6">
         <Reveal direction="left">
-          <h2 className="text-2xl font-light mb-4">Эрхэм зорлиго</h2>
-          <p className="text-neutral-600 leading-relaxed">
-            Бид чанар, инновац, тогтвортой хөгжлийг эрхэмлэн, хэрэглэгчдийн
-            хэрэгцээ, хүлээлтэд нийцсэн аюулгүй, үнэ цэнтэй бүтээн байгуулалтыг
-            хэрэгжүүлж, амьдрах болон ажиллах таатай орчныг бүрдүүлэхийг
-            зорьдог.
-          </p>
+          <div className="h-full border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-400 hover:shadow-md">
+            <div className="flex items-center gap-3">
+              <Target className="h-5 w-5 text-[#F58220]" />
+              <h2 className="text-2xl font-light text-neutral-900">
+                Эрхэм зорлиго
+              </h2>
+            </div>
+            <p className="mt-5 text-neutral-600 leading-relaxed">
+              Бид чанар, инновац, тогтвортой хөгжлийг эрхэмлэн, хэрэглэгчдийн
+              хэрэгцээ, хvлээлтэд нийцсэн аюулгvй, vнэ цэнтэй бvтээн байгуулалтыг
+              хэрэгжvvлж, амьдрах болон ажиллах таатай орчныг бvрдvvлэхийг
+              зорьдог.
+            </p>
+          </div>
         </Reveal>
         <Reveal direction="right" delay={150}>
-          <h2 className="text-2xl font-light mb-4">Алсын хараа</h2>
-          <p className="text-neutral-600 leading-relaxed">
-            Барилга, үл хөдлөх хөрөнгийн салбарт инновац, чанар, тогтвортой
-            хөгжлөөр манлайлан, Монголын ирээдүйн үнэ цэнтэй орон зайг бүтээх
-            тэргүүлэгч компани байна.
-          </p>
+          <div className="h-full border border-neutral-200 bg-white p-8 transition-all duration-300 hover:border-neutral-400 hover:shadow-md">
+            <div className="flex items-center gap-3">
+              <Eye className="h-5 w-5 text-[#F58220]" />
+              <h2 className="text-2xl font-light text-neutral-900">
+                Алсын хараа
+              </h2>
+            </div>
+            <p className="mt-5 text-neutral-600 leading-relaxed">
+              Барилга, vл хөдлөх хөрөнгийн салбарт инновац, чанар, тогтвортой
+              хөгжлөөр манлайлан, Монголын ирээдvйн vнэ цэнтэй орон зайг бvтээх
+              тэргvvлэгч компани байна.
+            </p>
+          </div>
         </Reveal>
       </section>
 
@@ -140,19 +141,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="max-w-5xl mx-auto px-6 py-28 grid grid-cols-2 md:grid-cols-4 text-center gap-10">
+      {/* STATS — bordered card grid */}
+      <section className="max-w-5xl mx-auto px-6 py-28 grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          ["60+", "Төслийн удирдлага, зөвлөх үйлчилгээ"],
+          ["60+", "Төслийн удирдлага, зөвлөх vйлчилгээ"],
           ["122+", "Манай ажилтнууд"],
           ["140+", "Олон улсын стандарт хангасан ажиллагаа"],
-          ["31+", "Бодит Бүтээн байгуулалтууд"],
+          ["31+", "Бодит Бvтээн байгуулалтууд"],
         ].map(([num, label], i) => (
           <Reveal key={i} direction="up" delay={i * 120}>
-            <p className="text-4xl font-extralight">{num}</p>
-            <p className="text-xs tracking-[0.25em] text-neutral-500 uppercase mt-2">
-              {label}
-            </p>
+            <div className="border border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#F58220] hover:shadow-md">
+              <p className="text-4xl font-extralight text-neutral-900">{num}</p>
+              <p className="text-xs tracking-[0.25em] text-neutral-500 uppercase mt-2">
+                {label}
+              </p>
+            </div>
           </Reveal>
         ))}
       </section>
@@ -168,29 +171,32 @@ export default function AboutPage() {
           />
         </Reveal>
         <Reveal direction="right" delay={150}>
-          <p className="text-xs tracking-[0.35em] text-[#F58220] uppercase">
-            Захиралын&apos; мэндчилгээ
-          </p>
+          <div className="flex items-center gap-3">
+            <span className="h-[2px] w-8 bg-[#F58220]" />
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#F58220]">
+              Захиралын мэндчилгээ
+            </p>
+          </div>
           <h2 className="mt-6 text-4xl md:text-5xl font-extralight leading-tight">
             Манай байгууллагын цахим хуудсанд тавтай морилно уу.
           </h2>
           <p className="mt-8 text-neutral-600 leading-relaxed">
-            1997 онд байгуулагдсан Бодь Пропертийз ХХК нь үл хөдлөх хөрөнгө,
-            барилга бүтээн байгуулалтын төслүүдийг төлөвлөлтөөс хэрэгжилт хүртэл
-            цогцоор нь хэрэгжүүлэн ажиллаж байна. Байгуулагдсан цагаасаа эхлэн
-            Монгол Улсын бүтээн байгуулалт, хөрөнгө оруулалтын салбарт үнэтэй
+            1997 онд байгуулагдсан Бодь Пропертийз ХХК нь vл хөдлөх хөрөнгө,
+            барилга бvтээн байгуулалтын төслvvдийг төлөвлөлтөөс хэрэгжилт хvртэл
+            цогцоор нь хэрэгжvvлэн ажиллаж байна. Байгуулагдсан цагаасаа эхлэн
+            Монгол Улсын бvтээн байгуулалт, хөрөнгө оруулалтын салбарт vнэтэй
             хувь нэмэр оруулж, чанар, инновац, мэргэжлийн ур чадвараараа олон
             удаа шилдэг байгууллагаар шалгарсан. Манай чадварлаг хамт олон орчин
-            үеийн техник, технологийг ашиглан захиалагчдын хэрэгцээнд нийцсэн,
-            чанартай, найдвартай бүтээн байгуулалтыг хэрэгжүүлж, харилцагчдынхаа
-            итгэлийг хүлээсээр ирсэн. Бид цаашид ч хүний нөөц, инновац,
-            тогтвортой хөгжлийг эрхэмлэн, үнэ цэнтэй орон зай, бүтээн
+            vеийн техник, технологийг ашиглан захиалагчдын хэрэгцээнд нийцсэн,
+            чанартай, найдвартай бvтээн байгуулалтыг хэрэгжvvлж, харилцагчдынхаа
+            итгэлийг хvлээсээр ирсэн. Бид цаашид ч хvний нөөц, инновац,
+            тогтвортой хөгжлийг эрхэмлэн, vнэ цэнтэй орон зай, бvтээн
             байгуулалтыг бий болгохын төлөө тууштай ажиллах болно.
           </p>
-          <div className="mt-10">
+          <div className="mt-10 border-l-2 border-[#F58220] pl-5">
             <p className="text-xl font-light">Б.ТЭГШБАЯР</p>
             <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mt-2">
-              Бодь Пропертийз ХХК-н Гүйцэтгэх Захирал 
+              Бодь Пропертийз ХХК-н Гvйцэтгэх Захирал
             </p>
           </div>
         </Reveal>
@@ -209,7 +215,7 @@ export default function AboutPage() {
           </h2>
           <button
             onClick={() => setOpenModal(true)}
-            className="mt-10 px-10 py-4 border border-white hover:bg-white hover:text-black transition tracking-widest text-sm cursor-pointer"
+            className="mt-10 cursor-pointer border border-white px-10 py-4 text-sm tracking-widest transition hover:bg-white hover:text-black active:scale-95"
           >
             CONTACT US
           </button>
@@ -218,46 +224,53 @@ export default function AboutPage() {
 
       {/* MODAL */}
       {openModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-xl p-10 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-xl border border-neutral-200 bg-white p-10">
             <button
               onClick={() => setOpenModal(false)}
-              className="absolute top-6 right-6 text-neutral-400 hover:text-black text-2xl"
+              className="absolute right-6 top-6 text-neutral-400 transition hover:text-black"
+              aria-label="Хаах"
             >
-              ×
+              <X className="h-5 w-5" />
             </button>
-            <p className="text-xs tracking-[0.3em] uppercase text-[#F58220]">
-              Contact Us
-            </p>
+
+            <div className="flex items-center gap-3">
+              <span className="h-[2px] w-8 bg-[#F58220]" />
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#F58220]">
+                Contact Us
+              </p>
+            </div>
             <h2 className="mt-4 text-3xl font-extralight">
               Start Your Project
             </h2>
+
             <form className="mt-10 space-y-6">
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full border-b border-neutral-300 outline-none py-3"
+                className="w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full border-b border-neutral-300 outline-none py-3"
+                className="w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
               />
               <input
                 type="email"
                 placeholder="Email Address"
-                className="w-full border-b border-neutral-300 outline-none py-3"
+                className="w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
               />
               <textarea
                 rows={4}
                 placeholder="Tell us about your project..."
-                className="w-full border-b border-neutral-300 outline-none py-3 resize-none"
+                className="w-full resize-none border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
               />
               <button
                 type="submit"
-                className="mt-6 bg-black text-white px-10 py-4 tracking-[0.2em] text-sm hover:bg-neutral-800 transition"
+                className="mt-6 flex cursor-pointer items-center gap-2 bg-neutral-900 px-10 py-4 text-sm tracking-[0.2em] text-white shadow-sm transition hover:bg-[#F58220] active:scale-95"
               >
                 SEND MESSAGE
+                <Send className="h-4 w-4" />
               </button>
             </form>
           </div>

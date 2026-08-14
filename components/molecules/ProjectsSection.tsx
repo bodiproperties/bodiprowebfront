@@ -17,13 +17,16 @@ export function ProjectsSection() {
 
   const handleNext = () => {
     setSelectedIndex((prev) =>
-      prev === null ? 0 : (prev + 1) % projects.length
+      prev === null ? 0 : (prev + 1) % projects.length,
     );
   };
 
   return (
     <>
-      <section id="projects" className="py-24 px-8 bg-neutral-100 overflow-hidden">
+      <section
+        id="projects"
+        className="py-24 px-8 bg-neutral-100 overflow-hidden"
+      >
         <div className="max-w-[1400px] mx-auto">
           <Reveal direction="left">
             <div className="flex items-baseline justify-between mb-16">
@@ -37,7 +40,10 @@ export function ProjectsSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-              <Reveal key={project.id} direction={index % 2 === 0 ? "left" : "right"}>
+              <Reveal
+                key={project.id}
+                direction={index % 2 === 0 ? "left" : "right"}
+              >
                 <button
                   onClick={() => setSelectedIndex(index)}
                   className="group w-full text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"

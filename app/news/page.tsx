@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
+import { Search, Calendar, ArrowRight, Sparkles } from "lucide-react";
+import NewsHero from "@/components/molecules/NewsHero";
 
 const posts = [
   {
@@ -8,6 +13,9 @@ const posts = [
     title: "The Role of Light in Modern Architecture",
     date: "Mar 2026",
     category: "Insights",
+    featured: true,
+    excerpt:
+      "Exploring how architecture shapes emotion through space, proportion, material and natural light.",
     image:
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&h=1000&fit=crop",
   },
@@ -16,6 +24,9 @@ const posts = [
     title: "Minimalism and Human-Centered Design",
     date: "Feb 2026",
     category: "Essay",
+    featured: false,
+    excerpt:
+      "Exploring how architecture shapes emotion through space, proportion, material and natural light.",
     image:
       "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&h=1000&fit=crop",
   },
@@ -24,36 +35,33 @@ const posts = [
     title: "Material Honesty in Contemporary Spaces",
     date: "Jan 2026",
     category: "Research",
+    featured: false,
+    excerpt:
+      "Exploring how architecture shapes emotion through space, proportion, material and natural light.",
     image: "/images/10.jpg",
   },
 ];
 
+const CATEGORIES = ["All", "Insights", "Essay", "Research"];
+
 export default function NewsPage() {
+  const [selectedCat, setSelectedCat] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesCat = selectedCat === "All" || post.category === selectedCat;
+    const q = searchQuery.toLowerCase();
+    const matchesSearch =
+      !q ||
+      post.title.toLowerCase().includes(q) ||
+      post.excerpt.toLowerCase().includes(q);
+    return matchesCat && matchesSearch;
+  });
+
   return (
     <main className="bg-white text-black overflow-hidden">
       {/* HERO */}
-      <section className="relative h-[80vh] flex items-end overflow-hidden">
-        <Image
-          src="/images/9.jpg"
-          alt=""
-          fill
-          priority
-          className="object-cover scale-105"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative max-w-6xl mx-auto w-full px-8 pb-20 text-white">
-          <p className="text-xs tracking-[0.35em] uppercase text-[#F58220]">
-            Journal
-          </p>
-          <h1 className="mt-6 text-5xl md:text-7xl font-extralight leading-tight max-w-4xl">
-            Insights, ideas and stories from our studio.
-          </h1>
-          <p className="mt-8 text-white/70 max-w-xl leading-relaxed">
-            Exploring architecture, material, light and human experience through
-            essays and research.
-          </p>
-        </div>
-      </section>
+      <NewsHero />
 
       {/* STATS */}
       <section className="max-w-6xl mx-auto px-8 py-24 grid md:grid-cols-4 gap-10 text-center">
@@ -72,67 +80,141 @@ export default function NewsPage() {
         ))}
       </section>
 
-      {/* HEADER */}
-      <section className="max-w-6xl mx-auto px-8 mb-16">
+      {/* HEADER + SEARCH */}
+      <section className="max-w-6xl mx-auto px-8 mb-12">
         <Reveal direction="left">
-          <p className="text-xs tracking-[0.35em] text-[#F58220] uppercase">
-            Latest Articles
-          </p>
-          <h2 className="mt-5 text-4xl md:text-6xl font-extralight">
-            Мэдээ &amp; мэдээлэл
-          </h2>
+          <div className="flex items-center gap-3">
+            <span className="h-[2px] w-8 bg-[#F58220]" />
+            <p className="text-xs uppercase tracking-[0.3em] font-semibold text-[#F58220]">
+              Latest Articles
+            </p>
+          </div>
+          <div className="mt-4 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-extralight text-neutral-900">
+                Мэдээ &amp; мэдээлэл
+              </h2>
+              <p className="mt-3 max-w-xl font-light text-neutral-500">
+                Exploring architecture, material, light and human experience.
+              </p>
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full md:w-72">
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles..."
+                className="w-full border border-neutral-200 bg-neutral-50 py-2.5 pl-10 pr-4 text-sm transition focus:border-[#F58220] focus:bg-white focus:outline-none"
+              />
+            </div>
+          </div>
         </Reveal>
       </section>
 
-      {/* ARTICLES */}
-      <div className="max-w-6xl mx-auto px-8 space-y-20">
-        {posts.map((post, i) => {
-          const imageLeft = i % 2 === 0;
-          return (
-            <Link
-              key={post.id}
-              href={`/news/${post.id}`}
-              className="group grid md:grid-cols-2 gap-12 items-center"
+      {/* Filter Tabs */}
+      <Reveal direction="up" delay={100}>
+        <div className="max-w-6xl mx-auto px-8 mb-16 flex flex-wrap gap-2 border-b border-neutral-200 pb-4">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCat(cat)}
+              className={`cursor-pointer px-5 py-2 text-xs font-medium uppercase tracking-wider transition-all ${
+                selectedCat === cat
+                  ? "bg-neutral-900 text-white shadow-md"
+                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+              }`}
             >
-              {/* IMAGE */}
-              <Reveal
-                direction={imageLeft ? "left" : "right"}
-                className={`relative aspect-[16/10] overflow-hidden ${
-                  imageLeft ? "" : "md:order-2"
-                }`}
-              >
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition" />
-              </Reveal>
+              {cat}
+            </button>
+          ))}
+        </div>
+      </Reveal>
 
-              {/* CONTENT */}
+      {/* ARTICLES */}
+      <div className="max-w-6xl mx-auto px-8 space-y-8">
+        {filteredPosts.length === 0 ? (
+          <div className="border border-dashed border-neutral-300 bg-neutral-50 py-16 text-center">
+            <p className="text-base text-neutral-500">
+              No articles found matching your filter criteria.
+            </p>
+            <button
+              onClick={() => {
+                setSelectedCat("All");
+                setSearchQuery("");
+              }}
+              className="mt-4 text-xs font-semibold uppercase text-[#F58220] underline"
+            >
+              Clear search filters
+            </button>
+          </div>
+        ) : (
+          filteredPosts.map((post, i) => {
+            const imageLeft = i % 2 === 0;
+            return (
               <Reveal
-                direction={imageLeft ? "right" : "left"}
-                delay={150}
-                className={imageLeft ? "" : "md:order-1"}
+                key={post.id}
+                direction={i % 2 === 0 ? "left" : "right"}
+                delay={i * 80}
               >
-                <div className="flex gap-4 text-xs tracking-[0.3em] uppercase text-neutral-400">
-                  <span>{post.category}</span>
-                  <span>•</span>
-                  <span>{post.date}</span>
-                </div>
-                <h2 className="mt-5 text-3xl md:text-4xl font-extralight leading-tight group-hover:tracking-wide transition">
-                  {post.title}
-                </h2>
-                <p className="mt-6 text-neutral-500 leading-relaxed max-w-md">
-                  Exploring how architecture shapes emotion through space,
-                  proportion, material and natural light.
-                </p>
-                <div className="mt-8 h-px w-0 bg-black group-hover:w-32 transition-all duration-500" />
+                <Link
+                  href={`/news/${post.id}`}
+                  className="group grid items-center gap-0 border border-neutral-200 bg-white transition-all duration-300 hover:border-neutral-400 hover:shadow-md md:grid-cols-2"
+                >
+                  {/* IMAGE */}
+                  <div
+                    className={`relative aspect-[16/10] overflow-hidden ${
+                      imageLeft ? "" : "md:order-2"
+                    }`}
+                  >
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/10 transition group-hover:bg-black/20" />
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className={`p-8 md:p-10 ${imageLeft ? "" : "md:order-1"}`}>
+                    <div className="flex items-center gap-3">
+                      <span className="bg-neutral-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-neutral-700">
+                        {post.category}
+                      </span>
+                      {post.featured && (
+                        <span className="flex items-center gap-1 bg-[#F58220]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#F58220]">
+                          <Sparkles className="h-3 w-3" />
+                          Featured
+                        </span>
+                      )}
+                    </div>
+
+                    <h2 className="mt-4 text-2xl font-light leading-tight tracking-tight text-neutral-900 transition group-hover:tracking-wide md:text-3xl">
+                      {post.title}
+                    </h2>
+
+                    <div className="mt-3 flex items-center gap-1.5 text-sm font-light text-neutral-500">
+                      <Calendar className="h-4 w-4 text-[#F58220]" />
+                      {post.date}
+                    </div>
+
+                    <p className="mt-4 max-w-md leading-relaxed text-neutral-500">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="mt-6 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-900 transition group-hover:text-[#F58220]">
+                      Read Article
+                      <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </Link>
               </Reveal>
-            </Link>
-          );
-        })}
+            );
+          })
+        )}
       </div>
 
       {/* QUOTE */}

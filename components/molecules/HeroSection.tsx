@@ -109,39 +109,41 @@ export function HeroSection() {
           </div>
 
           <h1 className="mt-10 select-none">
-  {lines.map((line: string, i: number) => {
-    const isOutline = i === (t.hero.outlineIndex ?? 1);
-    const longest = Math.max(...lines.map((l) => l.length));
-    const sizeClass =
-      longest > 12
-        ? "text-[7.5vw] lg:text-[4.4rem]"
-        : longest > 8
-          ? "text-[9.5vw] lg:text-[5.6rem]"
-          : "text-[13vw] lg:text-[7.5rem]";
-    return (
-      <span
-        key={i}
-        className="block overflow-visible"
-        style={{ lineHeight: 1.25, marginBottom: "0.05em" }}
-      >
-        <span
-          className={`block ${sizeClass} font-extralight ${
-            isOutline ? "text-transparent" : "text-neutral-950"
-          }`}
-          style={{
-            lineHeight: 1.25,
-            ...(isOutline ? { WebkitTextStroke: "1.5px #0a0a0a" } : {}),
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? "translateY(0)" : "translateY(110%)",
-            transition: `opacity 900ms ease ${250 + i * 140}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${250 + i * 140}ms`,
-          }}
-        >
-          {line}
-        </span>
-      </span>
-    );
-  })}
-</h1>
+            {lines.map((line: string, i: number) => {
+              const isOutline = i === (t.hero.outlineIndex ?? 1);
+              const longest = Math.max(...lines.map((l) => l.length));
+              const sizeClass =
+                longest > 12
+                  ? "text-[7.5vw] lg:text-[4.4rem]"
+                  : longest > 8
+                    ? "text-[9.5vw] lg:text-[5.6rem]"
+                    : "text-[13vw] lg:text-[7.5rem]";
+              return (
+                <span
+                  key={i}
+                  className="block overflow-visible"
+                  style={{ lineHeight: 1.25, marginBottom: "0.05em" }}
+                >
+                  <span
+                    className={`block ${sizeClass} font-extralight ${
+                      isOutline ? "text-transparent" : "text-neutral-950"
+                    }`}
+                    style={{
+                      lineHeight: 1.25,
+                      ...(isOutline
+                        ? { WebkitTextStroke: "1.5px #0a0a0a" }
+                        : {}),
+                      opacity: loaded ? 1 : 0,
+                      transform: loaded ? "translateY(0)" : "translateY(110%)",
+                      transition: `opacity 900ms ease ${250 + i * 140}ms, transform 900ms cubic-bezier(0.22,1,0.36,1) ${250 + i * 140}ms`,
+                    }}
+                  >
+                    {line}
+                  </span>
+                </span>
+              );
+            })}
+          </h1>
 
           {/* Гар зурсан мэт зураас — гарчгийн доор */}
           <svg
