@@ -78,7 +78,7 @@ function AboutHero() {
                 "opacity 900ms ease 280ms, transform 900ms cubic-bezier(0.22,1,0.36,1) 280ms",
             }}
           >
-            Бvтээн байгуулалтаар
+            Бүтээн байгуулалтаар
           </span>
           <span
             className="mt-2 block text-5xl font-extralight leading-tight text-transparent md:text-7xl"
@@ -90,7 +90,7 @@ function AboutHero() {
                 "opacity 900ms ease 420ms, transform 900ms cubic-bezier(0.22,1,0.36,1) 420ms",
             }}
           >
-            ирээдvйг бvтээнэ
+            ирээдүйг бүтээнэ
           </span>
         </h1>
 
