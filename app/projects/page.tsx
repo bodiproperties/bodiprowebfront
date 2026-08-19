@@ -314,6 +314,7 @@ export default function ProjectsSection() {
                       src={project.image}
                       alt={project.title}
                       fill
+                      quality={90}
                       className="object-cover transition duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/25 transition" />
