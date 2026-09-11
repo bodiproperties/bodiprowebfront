@@ -179,7 +179,9 @@ export default function NewsPage() {
                   </div>
 
                   {/* CONTENT */}
-                  <div className={`p-8 md:p-10 ${imageLeft ? "" : "md:order-1"}`}>
+                  <div
+                    className={`p-8 md:p-10 ${imageLeft ? "" : "md:order-1"}`}
+                  >
                     <div className="flex items-center gap-3">
                       <span className="bg-neutral-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-neutral-700">
                         {post.category}

@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 type Props = {
-  href: string
-  label: string
-  threshold?: number
-}
+  href: string;
+  label: string;
+  threshold?: number;
+};
 
 export function BackButton({ href, label, threshold = 400 }: Props) {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > threshold)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [threshold])
+    const onScroll = () => setVisible(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [threshold]);
 
   return (
     <Link
@@ -33,8 +33,8 @@ export function BackButton({ href, label, threshold = 400 }: Props) {
         transition-all duration-500 ease-out
         ${
           visible
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 translate-y-4 pointer-events-none'
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
         }`}
     >
       <ArrowLeft
@@ -43,5 +43,5 @@ export function BackButton({ href, label, threshold = 400 }: Props) {
       />
       <span>{label}</span>
     </Link>
-  )
+  );
 }

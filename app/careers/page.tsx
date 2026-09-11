@@ -81,8 +81,6 @@ function useResponsiveCarousel() {
   return config;
 }
 
-
-
 export default function CareersPage() {
   return (
     <main className="bg-white text-[#4D4C4D] overflow-hidden">

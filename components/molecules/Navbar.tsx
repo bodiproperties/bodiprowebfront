@@ -35,7 +35,9 @@ export function Navbar() {
   return (
     <header
       className={`fixed w-full top-0 z-50 bg-white transition-shadow duration-300 ${
-        scrolled ? "border-b border-neutral-200 shadow-sm" : "border-b border-transparent"
+        scrolled
+          ? "border-b border-neutral-200 shadow-sm"
+          : "border-b border-transparent"
       }`}
     >
       <nav
@@ -73,7 +75,9 @@ export function Navbar() {
                 key={key}
                 href={href}
                 className={`relative text-xs tracking-[0.15em] transition-colors ${
-                  active ? "text-[#F58220]" : "text-neutral-600 hover:text-neutral-900"
+                  active
+                    ? "text-[#F58220]"
+                    : "text-neutral-600 hover:text-neutral-900"
                 }`}
               >
                 {p.nav[key]}

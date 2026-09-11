@@ -30,7 +30,7 @@ function Reveal({
           io.unobserve(entry.target);
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -40,8 +40,8 @@ function Reveal({
     direction === "left"
       ? "-translate-x-16 opacity-0"
       : direction === "right"
-      ? "translate-x-16 opacity-0"
-      : "translate-y-12 opacity-0";
+        ? "translate-x-16 opacity-0"
+        : "translate-y-12 opacity-0";
 
   return (
     <div
@@ -87,7 +87,7 @@ export default function ServicesPage() {
   return (
     <main className="bg-white text-black overflow-hidden">
       {/* HERO */}
-        <ServicesHero />
+      <ServicesHero />
 
       {/* SERVICES */}
       <section className="max-w-6xl mx-auto px-6 md:px-16 lg:px-24 py-28 space-y-24">

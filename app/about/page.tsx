@@ -71,7 +71,7 @@ export default function AboutPage() {
       <section className="max-w-5xl mx-auto px-6 py-28">
         <Reveal direction="left">
           <h2 className="text-3xl md:text-5xl font-extralight leading-snug text-center">
-            Алсын хараа эрхэм зорлиго
+            Үнэт зүйл
           </h2>
         </Reveal>
         <Reveal direction="right" delay={150}>
@@ -98,9 +98,9 @@ export default function AboutPage() {
             </div>
             <p className="mt-5 text-neutral-600 leading-relaxed">
               Бид чанар, инновац, тогтвортой хөгжлийг эрхэмлэн, хэрэглэгчдийн
-              хэрэгцээ, хvлээлтэд нийцсэн аюулгvй, vнэ цэнтэй бvтээн байгуулалтыг
-              хэрэгжvvлж, амьдрах болон ажиллах таатай орчныг бvрдvvлэхийг
-              зорьдог.
+              хэрэгцээ, хvлээлтэд нийцсэн аюулгvй, vнэ цэнтэй бvтээн
+              байгуулалтыг хэрэгжvvлж, амьдрах болон ажиллах таатай орчныг
+              бvрдvvлэхийг зорьдог.
             </p>
           </div>
         </Reveal>
@@ -150,7 +150,7 @@ export default function AboutPage() {
           ["31+", "Бодит Бvтээн байгуулалтууд"],
         ].map(([num, label], i) => (
           <Reveal key={i} direction="up" delay={i * 120}>
-            <div className="border border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#F58220] hover:shadow-md">
+            <div className="border h-40 border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#F58220] hover:shadow-md">
               <p className="text-4xl font-extralight text-neutral-900">{num}</p>
               <p className="text-xs tracking-[0.25em] text-neutral-500 uppercase mt-2">
                 {label}
@@ -158,48 +158,6 @@ export default function AboutPage() {
             </div>
           </Reveal>
         ))}
-      </section>
-
-      {/* DIRECTOR MESSAGE */}
-      <section className="max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-20 items-center">
-        <Reveal direction="left" className="relative h-[500px]">
-          <Image
-            src="/images/prodirector.jpg"
-            alt="Director"
-            fill
-            className="object-contain"
-          />
-        </Reveal>
-        <Reveal direction="right" delay={150}>
-          <div className="flex items-center gap-3">
-            <span className="h-[2px] w-8 bg-[#F58220]" />
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#F58220]">
-              Захиралын мэндчилгээ
-            </p>
-          </div>
-          <h2 className="mt-6 text-4xl md:text-5xl font-extralight leading-tight">
-            Манай байгууллагын цахим хуудсанд тавтай морилно уу.
-          </h2>
-          <p className="mt-8 text-neutral-600 leading-relaxed">
-            1997 онд байгуулагдсан Бодь Пропертийз ХХК нь vл хөдлөх хөрөнгө,
-            барилга бvтээн байгуулалтын төслvvдийг төлөвлөлтөөс хэрэгжилт хvртэл
-            цогцоор нь хэрэгжvvлэн ажиллаж байна. Байгуулагдсан цагаасаа эхлэн
-            Монгол Улсын бvтээн байгуулалт, хөрөнгө оруулалтын салбарт vнэтэй
-            хувь нэмэр оруулж, чанар, инновац, мэргэжлийн ур чадвараараа олон
-            удаа шилдэг байгууллагаар шалгарсан. Манай чадварлаг хамт олон орчин
-            vеийн техник, технологийг ашиглан захиалагчдын хэрэгцээнд нийцсэн,
-            чанартай, найдвартай бvтээн байгуулалтыг хэрэгжvvлж, харилцагчдынхаа
-            итгэлийг хvлээсээр ирсэн. Бид цаашид ч хvний нөөц, инновац,
-            тогтвортой хөгжлийг эрхэмлэн, vнэ цэнтэй орон зай, бvтээн
-            байгуулалтыг бий болгохын төлөө тууштай ажиллах болно.
-          </p>
-          <div className="mt-10 border-l-2 border-[#F58220] pl-5">
-            <p className="text-xl font-light">Б.ТЭГШБАЯР</p>
-            <p className="text-sm uppercase tracking-[0.25em] text-neutral-400 mt-2">
-              Бодь Пропертийз ХХК-н Гvйцэтгэх Захирал
-            </p>
-          </div>
-        </Reveal>
       </section>
 
       {/* ROADMAP */}
