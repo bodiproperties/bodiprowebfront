@@ -16,10 +16,14 @@ const NAV_ITEMS = [
 ] as const;
 
 export function Navbar() {
-  const { p, t } = useLang();
+  const { t } = useLang();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // /projects/abc, /news/slug зэрэг дэд хуудсанд ч эх цэс идэвхтэй харагдана
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -32,6 +36,14 @@ export function Navbar() {
     setOpen(false);
   }, [pathname]);
 
+  // Mobile menu нээлттэй үед хуудас ард нь гүйхгүй
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className={`fixed w-full top-0 z-50 bg-white transition-shadow duration-300 ${
@@ -41,7 +53,7 @@ export function Navbar() {
       }`}
     >
       <nav
-        className="max-w-350 mx-auto px-8 py-6 flex items-center justify-between"
+        className="max-w-350 mx-auto px-5 py-5 sm:px-8 sm:py-6 flex items-center justify-between"
         aria-label="Main navigation"
       >
         {/* LOGO — vргэлж хар хувилбар (цагаан дэвсгэрт зориулав) */}
@@ -53,13 +65,13 @@ export function Navbar() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
-          className="relative block h-12 w-[240px] shrink-0 transition-opacity hover:opacity-70"
+          className="relative block h-10 w-40 sm:h-12 sm:w-[240px] shrink-0 transition-opacity hover:opacity-70"
         >
           <Image
             src="/images/Bodi-properties-english2.png"
             alt={t.nav.brand}
             fill
-            sizes="240px"
+            sizes="(min-width: 640px) 240px, 160px"
             priority
             className="object-contain object-left"
           />
@@ -68,19 +80,20 @@ export function Navbar() {
         {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center gap-10">
           {NAV_ITEMS.map(({ key, href }) => {
-            const active = pathname === href;
+            const active = isActive(href);
 
             return (
               <Link
                 key={key}
                 href={href}
+                aria-current={active ? "page" : undefined}
                 className={`relative text-xs tracking-[0.15em] transition-colors ${
                   active
                     ? "text-[#F58220]"
                     : "text-neutral-600 hover:text-neutral-900"
                 }`}
               >
-                {p.nav[key]}
+                {t.nav[key]}
 
                 {/* UNDERLINE */}
                 <span
@@ -94,17 +107,25 @@ export function Navbar() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5 sm:gap-6">
           <LanguageToggle scrolled={true} />
 
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="md:hidden flex flex-col gap-[5px]"
+            className="md:hidden relative h-6 w-6 cursor-pointer"
           >
-            <span className="block h-px w-6 bg-neutral-900" />
-            <span className="block h-px w-6 bg-neutral-900" />
+            <span
+              className={`absolute left-0 block h-px w-6 bg-neutral-900 transition-all duration-300 ${
+                open ? "top-3 rotate-45" : "top-2"
+              }`}
+            />
+            <span
+              className={`absolute left-0 block h-px w-6 bg-neutral-900 transition-all duration-300 ${
+                open ? "top-3 -rotate-45" : "top-[14px]"
+              }`}
+            />
           </button>
         </div>
       </nav>
@@ -114,18 +135,20 @@ export function Navbar() {
         <div className="md:hidden bg-white border-t border-neutral-200 px-8 py-6">
           <div className="flex flex-col gap-5">
             {NAV_ITEMS.map(({ key, href }) => {
-              const active = pathname === href;
+              const active = isActive(href);
 
               return (
                 <Link
                   key={key}
                   href={href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? "page" : undefined}
                   className={`text-sm tracking-[0.15em] transition-colors ${
-                    active ? "text-neutral-900 font-medium" : "text-neutral-500"
+                    active ? "text-[#F58220] font-medium" : "text-neutral-500"
                   }`}
                 >
-                  {p.nav[key]}
-                  {active && <div className="mt-1 h-px w-10 bg-black" />}
+                  {t.nav[key]}
+                  {active && <div className="mt-1 h-px w-10 bg-[#F58220]" />}
                 </Link>
               );
             })}

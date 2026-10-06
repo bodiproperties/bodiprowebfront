@@ -7,6 +7,7 @@ export interface HeroSlide {
   title: Record<Language, string>;
   desc: Record<Language, string>;
   category: Record<Language, string>;
+  position?: string;
 }
 
 export interface JobPosition {

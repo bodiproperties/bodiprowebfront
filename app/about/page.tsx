@@ -1,87 +1,69 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
-import { RoadmapSection } from "@/components/molecules/RoadmapSection";
 import { Target, Eye, X, Send } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
+import { RoadmapSection } from "@/components/molecules/RoadmapSection";
 import AboutHero from "@/components/molecules/AboutHero";
+import { useLang } from "@/lib/language-context";
 
-/* Scroll дээр харагдах үед гулсаж орж ирэх бүрхүүл */
-function Reveal({
-  children,
-  direction = "up",
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  direction?: "left" | "right" | "up";
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          io.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const hidden =
-    direction === "left"
-      ? "-translate-x-16 opacity-0"
-      : direction === "right"
-        ? "translate-x-16 opacity-0"
-        : "translate-y-12 opacity-0";
-
-  return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-1000 ease-out ${
-        shown ? "translate-x-0 translate-y-0 opacity-100" : hidden
-      } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
+const inputClass =
+  "w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white";
 
 export default function AboutPage() {
+  const { t, lang } = useLang();
+  const a = t.about;
+  const f = a.form;
+  const childLang = lang === "MN" ? "mn" : "en";
+
   const [openModal, setOpenModal] = useState(false);
+
+  // Modal нээлттэй үед: Escape-ээр хаах, body scroll түгжих
+  useEffect(() => {
+    if (!openModal) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenModal(false);
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [openModal]);
+
+  // TODO: Express backend-ийн contact endpoint руу POST болгох. Одоогоор mail client нээнэ.
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const body = [
+      `${f.name}: ${data.get("name")}`,
+      `${f.phone}: ${data.get("phone")}`,
+      `${f.email}: ${data.get("email")}`,
+      "",
+      String(data.get("message") ?? ""),
+    ].join("\n");
+    window.location.href = `mailto:${t.contact.email}?subject=${encodeURIComponent(
+      f.mailSubject,
+    )}&body=${encodeURIComponent(body)}`;
+    setOpenModal(false);
+  };
 
   return (
     <main className="bg-white text-black overflow-hidden">
       {/* HERO */}
-      <section className="relative w-full h-[85vh] overflow-hidden">
-        <AboutHero />
-      </section>
+      <AboutHero />
 
-      {/* INTRO */}
-      <section className="max-w-5xl mx-auto px-6 py-28">
+      {/* INTRO — AboutHero-ийн "#about-intro" товч энд гүйлгэнэ */}
+      <section id="about-intro" className="max-w-5xl mx-auto px-6 py-28 scroll-mt-24">
         <Reveal direction="left">
           <h2 className="text-3xl md:text-5xl font-extralight leading-snug text-center">
-            Үнэт зүйл
+            {a.valuesTitle}
           </h2>
         </Reveal>
         <Reveal direction="right" delay={150}>
           <p className="mt-10 text-neutral-600 leading-relaxed text-center">
-            Бодь Пропертийз" ХХК нь анх 1997 онд vл хөдлөх хөрөнгө, барилга
-            угсралтын ажлын төлөвлөлт, санхvvжилт, хэрэгжилтийг иж бvрнээр нь
-            гvйцэтгэгч төслийн байгууллагын хэлбэрээр vйл ажиллагаа явуулж
-            эхэлсэн. Байгуулагдсанаас хойш барилгын салбар цаашлаад улс,
-            нийслэлийн их бvтээн байгуулалт, өнгө төрхөд бодитой хувь нэмэр
-            оруулсан олон төслvvдийг амжилттай хэрэгжvvлсэн.
+            {a.intro}
           </p>
         </Reveal>
       </section>
@@ -93,15 +75,10 @@ export default function AboutPage() {
             <div className="flex items-center gap-3">
               <Target className="h-5 w-5 text-[#F58220]" />
               <h2 className="text-2xl font-light text-neutral-900">
-                Эрхэм зорлиго
+                {a.missionTitle}
               </h2>
             </div>
-            <p className="mt-5 text-neutral-600 leading-relaxed">
-              Бид чанар, инновац, тогтвортой хөгжлийг эрхэмлэн, хэрэглэгчдийн
-              хэрэгцээ, хvлээлтэд нийцсэн аюулгvй, vнэ цэнтэй бvтээн
-              байгуулалтыг хэрэгжvvлж, амьдрах болон ажиллах таатай орчныг
-              бvрдvvлэхийг зорьдог.
-            </p>
+            <p className="mt-5 text-neutral-600 leading-relaxed">{a.mission}</p>
           </div>
         </Reveal>
         <Reveal direction="right" delay={150}>
@@ -109,14 +86,10 @@ export default function AboutPage() {
             <div className="flex items-center gap-3">
               <Eye className="h-5 w-5 text-[#F58220]" />
               <h2 className="text-2xl font-light text-neutral-900">
-                Алсын хараа
+                {a.visionTitle}
               </h2>
             </div>
-            <p className="mt-5 text-neutral-600 leading-relaxed">
-              Барилга, vл хөдлөх хөрөнгийн салбарт инновац, чанар, тогтвортой
-              хөгжлөөр манлайлан, Монголын ирээдvйн vнэ цэнтэй орон зайг бvтээх
-              тэргvvлэгч компани байна.
-            </p>
+            <p className="mt-5 text-neutral-600 leading-relaxed">{a.vision}</p>
           </div>
         </Reveal>
       </section>
@@ -126,16 +99,18 @@ export default function AboutPage() {
         <div className="relative h-[60vh]">
           <Image
             src="/images/3.jpg"
-            alt="Interior"
+            alt=""
             fill
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="object-cover"
           />
         </div>
         <div className="relative h-[60vh]">
           <Image
             src="/images/6.jpg"
-            alt="Exterior"
+            alt=""
             fill
+            sizes="(min-width: 768px) 50vw, 100vw"
             className="object-cover"
           />
         </div>
@@ -143,17 +118,14 @@ export default function AboutPage() {
 
       {/* STATS — bordered card grid */}
       <section className="max-w-5xl mx-auto px-6 py-28 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          ["60+", "Төслийн удирдлага, зөвлөх vйлчилгээ"],
-          ["122+", "Манай ажилтнууд"],
-          ["140+", "Олон улсын стандарт хангасан ажиллагаа"],
-          ["31+", "Бодит Бvтээн байгуулалтууд"],
-        ].map(([num, label], i) => (
-          <Reveal key={i} direction="up" delay={i * 120}>
+        {a.stats.map((stat, i) => (
+          <Reveal key={stat.label} direction="up" delay={i * 120}>
             <div className="border h-40 border-neutral-200 bg-white p-6 text-center transition-all duration-300 hover:border-[#F58220] hover:shadow-md">
-              <p className="text-4xl font-extralight text-neutral-900">{num}</p>
+              <p className="text-4xl font-extralight text-neutral-900">
+                {stat.num}
+              </p>
               <p className="text-xs tracking-[0.25em] text-neutral-500 uppercase mt-2">
-                {label}
+                {stat.label}
               </p>
             </div>
           </Reveal>
@@ -162,32 +134,41 @@ export default function AboutPage() {
 
       {/* ROADMAP */}
       <section className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 pb-10">
-        <RoadmapSection lang="mn" />
+        <RoadmapSection lang={childLang} />
       </section>
 
       {/* CTA */}
       <section className="py-32 text-center bg-black text-white">
         <Reveal direction="up">
-          <h2 className="text-3xl md:text-5xl font-extralight">
-            Let&apos;s build something timeless together
-          </h2>
+          <h2 className="text-3xl md:text-5xl font-extralight">{a.ctaTitle}</h2>
           <button
+            type="button"
             onClick={() => setOpenModal(true)}
-            className="mt-10 cursor-pointer border border-white px-10 py-4 text-sm tracking-widest transition hover:bg-white hover:text-black active:scale-95"
+            className="mt-10 cursor-pointer border border-white px-10 py-4 text-sm uppercase tracking-widest transition hover:bg-white hover:text-black active:scale-95"
           >
-            CONTACT US
+            {a.ctaBtn}
           </button>
         </Reveal>
       </section>
 
       {/* MODAL */}
       {openModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-xl border border-neutral-200 bg-white p-10">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          onClick={() => setOpenModal(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="about-contact-title"
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto border border-neutral-200 bg-white p-10"
+          >
             <button
+              type="button"
               onClick={() => setOpenModal(false)}
-              className="absolute right-6 top-6 text-neutral-400 transition hover:text-black"
-              aria-label="Хаах"
+              className="absolute right-6 top-6 text-neutral-400 transition hover:text-black cursor-pointer"
+              aria-label={f.close}
             >
               <X className="h-5 w-5" />
             </button>
@@ -195,39 +176,53 @@ export default function AboutPage() {
             <div className="flex items-center gap-3">
               <span className="h-[2px] w-8 bg-[#F58220]" />
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#F58220]">
-                Contact Us
+                {f.label}
               </p>
             </div>
-            <h2 className="mt-4 text-3xl font-extralight">
-              Start Your Project
+            <h2 id="about-contact-title" className="mt-4 text-3xl font-extralight">
+              {f.title}
             </h2>
 
-            <form className="mt-10 space-y-6">
+            <form onSubmit={handleSubmit} className="mt-10 space-y-6">
               <input
+                name="name"
                 type="text"
-                placeholder="Full Name"
-                className="w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
+                required
+                autoComplete="name"
+                placeholder={f.name}
+                aria-label={f.name}
+                className={inputClass}
               />
               <input
+                name="phone"
                 type="tel"
-                placeholder="Phone Number"
-                className="w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
+                required
+                autoComplete="tel"
+                placeholder={f.phone}
+                aria-label={f.phone}
+                className={inputClass}
               />
               <input
+                name="email"
                 type="email"
-                placeholder="Email Address"
-                className="w-full border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
+                autoComplete="email"
+                placeholder={f.email}
+                aria-label={f.email}
+                className={inputClass}
               />
               <textarea
+                name="message"
                 rows={4}
-                placeholder="Tell us about your project..."
-                className="w-full resize-none border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm outline-none transition focus:border-[#F58220] focus:bg-white"
+                required
+                placeholder={f.message}
+                aria-label={f.message}
+                className={`${inputClass} resize-none`}
               />
               <button
                 type="submit"
-                className="mt-6 flex cursor-pointer items-center gap-2 bg-neutral-900 px-10 py-4 text-sm tracking-[0.2em] text-white shadow-sm transition hover:bg-[#F58220] active:scale-95"
+                className="mt-6 flex cursor-pointer items-center gap-2 bg-neutral-900 px-10 py-4 text-sm uppercase tracking-[0.2em] text-white shadow-sm transition hover:bg-[#F58220] active:scale-95"
               >
-                SEND MESSAGE
+                {f.submit}
                 <Send className="h-4 w-4" />
               </button>
             </form>

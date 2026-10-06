@@ -13,7 +13,7 @@ export function ContactSection() {
       id="contact"
       className="py-24 px-8 bg-neutral-900 text-white overflow-hidden"
     >
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-350 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Зүүн тал: контент */}
           <Reveal direction="left">
@@ -60,7 +60,7 @@ export function ContactSection() {
             <img
               src="/images/7.jpg"
               alt=""
-              className="w-full h-[450px] object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+              className="w-full h-112.5 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
             />
           </Reveal>
         </div>

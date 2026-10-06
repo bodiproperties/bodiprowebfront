@@ -1,8 +1,10 @@
 "use client";
 
+import { useLang } from "@/lib/language-context";
 import Image from "next/image";
 
 export default function RunningCompanyLogo() {
+  const { t } = useLang();
   const logos = [
     "/images/Bodi-properties-english2.png",
     "/images/Group22.png",
@@ -68,7 +70,7 @@ export default function RunningCompanyLogo() {
         <div className="max-w-[1400px] mx-auto px-8 mb-10 flex items-center gap-3">
           <div className="w-8 h-px bg-[#F58220]" />
           <p className="text-xs text-neutral-500 tracking-[0.25em] font-medium uppercase">
-            Манай хамтрагчид
+            {t.hero.partners}
           </p>
         </div>
 

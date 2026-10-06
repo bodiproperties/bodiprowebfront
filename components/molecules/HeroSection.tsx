@@ -35,8 +35,17 @@ export function HeroSection() {
 
   const lines: string[] = t.hero.heading.split("\n");
 
+  const services = [
+    t.hero.serv1,
+    t.hero.serv2,
+    t.hero.serv3,
+    t.hero.serv4,
+    t.hero.serv5,
+    t.hero.serv6,
+  ];
+
   const projectsCount = useCountUp(12, loaded);
-  const yearCount = useCountUp(2018, loaded);
+  const yearCount = useCountUp(1997, loaded);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 150);
@@ -81,7 +90,7 @@ export function HeroSection() {
       />
 
       {/* Босоо хажуугийн текст */}
-      <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 lg:block">
+      <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 lg:block ml-12">
         <p
           className="text-[10px] uppercase tracking-[0.5em] text-neutral-300"
           style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
@@ -186,7 +195,7 @@ export function HeroSection() {
                 {projectsCount}+
               </p>
               <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-neutral-400">
-                Төсөл
+                {t.projects.projectcounts}
               </p>
             </div>
             <div className="h-10 w-px bg-neutral-200" />
@@ -195,14 +204,14 @@ export function HeroSection() {
                 {yearCount}
               </p>
               <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-neutral-400">
-                Оноос хойш
+                {t.projects.projectsince}
               </p>
             </div>
             <div className="h-10 w-px bg-neutral-200" />
             <div>
               <p className="text-3xl font-extralight text-neutral-950">UB</p>
               <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-neutral-400">
-                Байршил
+                {t.projects.projetlocation}
               </p>
             </div>
           </div>
@@ -290,18 +299,14 @@ export function HeroSection() {
       {/* ===== ДООД — running marquee ===== */}
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden border-t border-neutral-100 bg-white py-4">
         <div className="marquee flex whitespace-nowrap">
-          {[0, 1].map((dup) => (
+          {[0, 1, 2, 3].map((dup) => (
             <div key={dup} className="flex shrink-0 items-center">
-              {Array.from({ length: 6 }).map((_, i) => (
+              {services.map((label, i) => (
                 <span
                   key={i}
                   className="mx-8 flex items-center gap-8 text-xs uppercase tracking-[0.3em] text-neutral-300"
                 >
-                  Architecture
-                  <span className="h-1 w-1 rounded-full bg-[#F58220]" />
-                  Interior
-                  <span className="h-1 w-1 rounded-full bg-[#F58220]" />
-                  Landscape
+                  {label}
                   <span className="h-1 w-1 rounded-full bg-[#F58220]" />
                 </span>
               ))}

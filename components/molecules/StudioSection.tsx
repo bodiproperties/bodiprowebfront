@@ -89,13 +89,13 @@ export function StudioSection() {
           className="grid grid-cols-3 gap-8 border-t border-neutral-800 pt-12"
         >
           {[
-            { end: 87, label: t.studio.stats.projects },
+            { end: 170, label: t.studio.stats.projects },
             { end: 14, label: t.studio.stats.awards },
-            { end: 22, label: t.studio.stats.years },
+            { end: 29, label: t.studio.stats.years },
           ].map((s, i) => (
             <Reveal key={i} direction="up" delay={i * 120}>
               <p className="text-5xl font-light mb-2">
-                <Counter end={s.end} play={play} />
+                <Counter end={s.end} play={play} /> +
               </p>
               <p className="text-xs text-neutral-500 tracking-[0.15em]">
                 {s.label}

@@ -6,7 +6,7 @@ export interface ProjectDetail {
 }
 
 export interface Project {
-  id: number
+  id: number | string
   title: string
   type: string
   category: string

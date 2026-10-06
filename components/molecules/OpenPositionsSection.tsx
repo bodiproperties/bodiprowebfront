@@ -68,7 +68,7 @@ export function OpenPositionsSection({
           <div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-neutral-900">
               {lang === "mn"
-                ? "Одоо Зарагдсан Ажлын Байрууд"
+                ? "Одоо зарлагдсан ажлын байрууд"
                 : "Current Opportunities"}
             </h2>
             <p className="mt-3 text-neutral-500 font-light text-base">
