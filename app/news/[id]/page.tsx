@@ -8,40 +8,51 @@ import {
 // env нь /api-гүй, зам нь /api-аар эхэлнэ (admin-тай ижил дүрэм)
 const API = process.env.NEXT_PUBLIC_API_URL;
 
+// API удаан хариулбал build/request гацахгүйн тулд 10 секундэд зогсооно
+const TIMEOUT_MS = 10_000;
+
 type Props = {
+  // Next.js 15+: params нь Promise
   params: Promise<{ id: string }>;
 };
 
 async function getNews(slug: string): Promise<PublicNews | null> {
-  const res = await fetch(`${API}/api/news/${encodeURIComponent(slug)}`, {
-    next: { revalidate: 60 },
-  });
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`News fetch failed: ${res.status}`);
-  return res.json();
+  const url = `${API}/api/news/${encodeURIComponent(slug)}`;
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    console.error(`[getNews] ${url} failed`, e);
+    return null;
+  }
 }
 
 async function getNewsList(): Promise<PublicNews[]> {
+  const url = `${API}/api/news`;
   try {
-    const res = await fetch(`${API}/api/news`, { next: { revalidate: 60 } });
-    return res.ok ? res.json() : [];
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    return res.ok ? await res.json() : [];
   } catch {
     return [];
   }
 }
 
 const stripHtml = (html = "") =>
-  html
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
 const firstImage = (html = "") =>
   html.match(/<img[^>]*\ssrc=["']([^"']+)["']/i)?.[1] ?? null;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const item = await getNews(id).catch(() => null);
+  const item = await getNews(id);
   if (!item) return { title: "News" };
 
   const title = item.title?.mn || item.title?.en || "News";

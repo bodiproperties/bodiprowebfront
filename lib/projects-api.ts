@@ -30,22 +30,41 @@ export type Lang = "EN" | "MN";
 
 // ---------- Server fetchers ----------
 
+// Build болон request бүрт API удаан хариулбал 10 секундын дараа зогсооно.
+// Үгүй бол Azure "унтаж" байх үед Vercel build 60 сек хүлээгээд унадаг.
+const TIMEOUT_MS = 10_000;
+
 export async function getProjects(): Promise<ApiProject[]> {
+  const url = `${API}/api/projects`;
   try {
-    const res = await fetch(`${API}/api/projects`, { next: { revalidate: 60 } });
-    return res.ok ? res.json() : [];
-  } catch {
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    if (!res.ok) {
+      console.error(`[getProjects] ${url} → ${res.status}`);
+      return [];
+    }
+    return await res.json();
+  } catch (e) {
+    console.error(`[getProjects] ${url} failed`, e);
     return [];
   }
 }
 
 export async function getProject(id: string): Promise<ApiProject | null> {
-  const res = await fetch(`${API}/api/projects/${encodeURIComponent(id)}`, {
-    next: { revalidate: 60 },
-  });
-  if (res.status === 404 || res.status === 400 || res.status === 500) return null;
-  if (!res.ok) throw new Error(`Project fetch failed: ${res.status}`);
-  return res.json();
+  const url = `${API}/api/projects/${encodeURIComponent(id)}`;
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    if (!res.ok) return null; // 404 (олдоогүй) / 400 (буруу UUID) / 500
+    return await res.json();
+  } catch (e) {
+    console.error(`[getProject] ${url} failed`, e);
+    return null;
+  }
 }
 
 // ---------- Хэл ----------
