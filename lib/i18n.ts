@@ -78,6 +78,7 @@ const en = {
     projetlocation: "LOCATION",
     notAvailable: "This project is not available in English.",
     allProjects: "All projects",
+    empty: "No projects in this category yet.",
 
     // Projects hero
     heroPill: "Bodi Properties · Projects 2026",
@@ -426,6 +427,7 @@ const mn: Translations = {
     projetlocation: "БАЙРШИЛ",
     notAvailable: "Энэ төсөл монгол хэл дээр байхгүй байна.",
     allProjects: "Бүх төсөл",
+    empty: "Энэ ангилалд төсөл одоогоор байхгүй.",
 
     // Projects hero
     heroPill: "Бодь Пропертийз · Төслүүд 2026",

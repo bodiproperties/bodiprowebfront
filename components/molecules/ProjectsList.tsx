@@ -4,8 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { ProjectModal } from "@/components/molecules/ProjectModal";
-import { Genplan } from "@/components/molecules/Genplan";
-import { LandscapeMap } from "@/components/molecules/LandscapeMap";
 import ProjectsHero from "@/components/molecules/ProjectsHero";
 import { useLang } from "@/lib/language-context";
 import {
@@ -23,107 +21,6 @@ const TABS = [
   "Construction",
 ] as const;
 type Tab = (typeof TABS)[number];
-
-// TODO: Genplan / Garden өгөгдлийг admin API-аас bilingual хэлбэрээр татах
-const VILLA_DESCRIPTION =
-  "3 давхар, том цонхтой, өмнөх талдаа хаалттай терраст luxury villa. Байгалийн гэрэл, орчин үеийн загварыг хослуулсан.";
-
-const VILLA_ROOMS = [
-  {
-    title: "Зочны өрөө",
-    text: "Өндөр таазтай, том цонхтой, гэрэлтэй зочны өрөө нь гэр бүлийн цуглаанд тохиромжтой.",
-    image: "/images/villa1-living.jpg",
-  },
-  {
-    title: "Гал тогоо",
-    text: "Орчин үеийн тоног төхөөрөмжтэй, том island-тай нээлттэй гал тогоо.",
-    image: "/images/villa1-kitchen.jpg",
-  },
-  {
-    title: "Унтлагын өрөө",
-    text: "Master bedroom нь өөрийн угаалгын өрөөтэй, гарцтай терраст.",
-    image: "/images/villa1-bedroom.jpg",
-  },
-  {
-    title: "Давхрын төлөвлөгөө",
-    text: "Villa-ийн бүтэц, өрөөнүүдийн байршил, талбайн тооцоо.",
-    image: "/images/villa1-floorplan.jpg",
-  },
-];
-
-const GENPLAN_PLOTS = [
-  {
-    id: 1,
-    x: 22,
-    y: 68,
-    status: "available" as const,
-    title: "Block 1 · Villa 1",
-    area: "320 м²",
-    price: "$450,000",
-    heroImage: "/images/villa1-hero.jpg",
-    description: VILLA_DESCRIPTION,
-    rooms: VILLA_ROOMS,
-  },
-  {
-    id: 2,
-    x: 30,
-    y: 46,
-    status: "reserved" as const,
-    title: "Block 1 · Villa 2",
-    area: "280 м²",
-    price: "$450,000",
-    heroImage: "/images/villa1-hero.jpg",
-    description: VILLA_DESCRIPTION,
-    rooms: VILLA_ROOMS,
-  },
-  {
-    id: 3,
-    x: 45,
-    y: 25,
-    status: "sold" as const,
-    title: "Block 1 · Villa 3",
-    area: "320 м²",
-    price: "$450,000",
-    heroImage: "/images/villa1-hero.jpg",
-    description: VILLA_DESCRIPTION,
-    rooms: VILLA_ROOMS,
-  },
-];
-
-const GARDEN_ZONES = [
-  {
-    id: 1,
-    x: 25,
-    y: 40,
-    category: "trees" as const,
-    title: "Модны цэцэрлэг",
-    stat: "40 төрлийн мод · 1,200 м²",
-    description: "Уугуул зүйлийн мод голлон тарьсан, сүүдэртэй амралтын бүс.",
-    heroImage: "/images/house.jpg",
-    gallery: ["/images/house.jpg", "/images/sp.jpg"],
-  },
-  {
-    id: 2,
-    x: 44,
-    y: 65,
-    category: "water" as const,
-    title: "Усан сан",
-    stat: "800 м² талбай",
-    description: "Тайван орчинтой хиймэл нуур, загас үржүүлдэг систем.",
-    heroImage: "/images/news.jpg",
-    gallery: ["/images/house.jpg", "/images/sp.jpg"],
-  },
-  {
-    id: 3,
-    x: 62,
-    y: 28,
-    category: "flowers" as const,
-    title: "Цэцгийн талбай",
-    stat: "15 төрлийн цэцэг · улирал бүр цэцэглэдэг",
-    heroImage: "/images/buildingbg1.jpg",
-    gallery: ["/images/house.jpg", "/images/sp.jpg"],
-  },
-];
 
 export function ProjectsList({ items }: { items: ApiProject[] }) {
   const { t, lang } = useLang();
@@ -213,21 +110,13 @@ export function ProjectsList({ items }: { items: ApiProject[] }) {
           </div>
         </section>
 
-        {/* GRID эсвэл GENPLAN (Construction сонгогдвол) */}
-        {activeTab === "Construction" ? (
-          <section className="max-w-6xl mx-auto px-8">
-            <Reveal direction="up">
-              <Genplan image="/images/genplan.jpg" plots={GENPLAN_PLOTS} />
-            </Reveal>
-          </section>
-        ) : activeTab === "Garden" ? (
-          <section className="max-w-6xl mx-auto px-8">
-            <Reveal direction="up">
-              <LandscapeMap
-                image="/images/garden-map.jpg"
-                zones={GARDEN_ZONES}
-              />
-            </Reveal>
+        {/* GRID — бүх tab ижил байдлаар category-оор шүүнэ.
+            Genplan / Garden map-ууд mock өгөгдөлтэй (хуурамч үнэ) байсан тул түр хассан. */}
+        {filteredProjects.length === 0 ? (
+          <section className="max-w-6xl mx-auto px-8 py-16 text-center">
+            <p className="text-sm tracking-[0.2em] uppercase text-neutral-400">
+              {p.empty}
+            </p>
           </section>
         ) : (
           <section className="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-12">

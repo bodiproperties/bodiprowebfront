@@ -4,12 +4,12 @@ const nextConfig = {
     ignoreBuildErrors: true, // TODO: tsc алдаануудыг засаад false болгох
   },
   images: {
+    // Боловсруулсан зургийг 30 хоног хадгална.
+    // Аюулгүй: upload-ын файлын нэр бүр timestamp-тай тул зураг солигдоход URL өөрчлөгддөг.
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
-      // Admin-аас upload хийсэн зургууд (Azure Blob)
       { protocol: "https", hostname: "bodipropertiesstorage.blob.core.windows.net" },
-      // Мэдээнд зураг байхгүй үед YouTube thumbnail
       { protocol: "https", hostname: "img.youtube.com" },
-      // Fallback болон careers hero зургууд
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "images.pexels.com" },
     ],
