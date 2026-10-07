@@ -6,11 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { ProjectModal } from "@/components/molecules/ProjectModal";
 import ProjectsHero from "@/components/molecules/ProjectsHero";
 import { useLang } from "@/lib/language-context";
-import {
-  toProject,
-  projectHasLang,
-  type ApiProject,
-} from "@/lib/projects-api";
+import { toProject, projectHasLang, type ApiProject } from "@/lib/projects-api";
 
 const TABS = [
   "All",
@@ -137,7 +133,7 @@ export function ProjectsList({ items }: { items: ApiProject[] }) {
                       src={project.image}
                       alt={project.title}
                       fill
-                      quality={90}
+                      quality={80}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       className="object-cover transition duration-700 group-hover:scale-110"
                     />

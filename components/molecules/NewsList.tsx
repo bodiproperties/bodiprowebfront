@@ -191,6 +191,7 @@ export function NewsList({ items }: { items: PublicNews[] }) {
                       src={card.image}
                       alt={card.title}
                       fill
+                      quality={80}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       className="object-cover transition duration-700 group-hover:scale-105"
                     />

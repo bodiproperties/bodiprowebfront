@@ -29,12 +29,20 @@ function pick(v: { en?: string; mn?: string } | undefined, lang: "EN" | "MN") {
 
 /** Мэдээ тухайн хэл дээр оруулагдсан эсэх (гарчиг эсвэл контент) */
 export function hasNewsLang(item: PublicNews, lang: "EN" | "MN") {
-  const text = (s = "") => s.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, "").trim();
+  const text = (s = "") =>
+    s
+      .replace(/<[^>]+>/g, "")
+      .replace(/&nbsp;/g, "")
+      .trim();
   return Boolean(text(pick(item.title, lang)) || text(pick(item.desc, lang)));
 }
 
 function readingMinutes(html: string) {
-  const words = html.replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean);
+  const words = html
+    .replace(/<[^>]+>/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
   return Math.max(1, Math.round(words.length / 200));
 }
 
@@ -109,7 +117,15 @@ export function NewsArticle({
     () => rawHtml.match(IMG_RE)?.[1] ?? FALLBACK_HERO,
     [rawHtml],
   );
-  const bodyHtml = rawHtml;
+  // Контент доторх зургууд: дэлгэцэнд ойртох үед л татагдана, хуудсыг гацаахгүй
+  const bodyHtml = useMemo(
+    () =>
+      rawHtml.replace(
+        /<img(?![^>]*\sloading=)/gi,
+        '<img loading="lazy" decoding="async"',
+      ),
+    [rawHtml],
+  );
 
   const minutes = readingMinutes(rawHtml);
   const date = formatDate(item.publishedAt ?? item.createdAt, lang);
@@ -174,6 +190,7 @@ export function NewsArticle({
           alt={title}
           fill
           priority
+          quality={85}
           sizes="100vw"
           className="object-cover"
         />
