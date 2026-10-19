@@ -62,9 +62,9 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* OPEN POSITIONS */}
+      {/* OPEN POSITIONS — BodiHR-аас live татна */}
       <section className="max-w-7xl mx-auto px-8 py-28">
-        <OpenPositionsSection lang={childLang} onSelectPosition={() => {}} />
+        <OpenPositionsSection lang={childLang} />
       </section>
 
       {/* HIRING PROCESS */}
