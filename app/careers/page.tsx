@@ -72,22 +72,6 @@ export default function CareersPage() {
         <HiringProcessSection lang={childLang} />
       </section>
 
-      {/* CTA */}
-      <section className="max-w-4xl mx-auto text-center py-32 px-8">
-        <Reveal direction="up">
-          <h2 className="text-5xl font-extralight text-neutral-900 leading-tight">
-            {t.hr.interest}
-          </h2>
-          <p className="mt-8 text-lg">{t.hr.sent}</p>
-          <a
-            href={`mailto:${CAREERS_EMAIL}`}
-            className="mt-12 inline-block border border-black px-10 py-4 hover:bg-[#F58220] hover:border-[#F58220] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F58220] transition"
-          >
-            {t.hr.btn}
-          </a>
-        </Reveal>
-      </section>
-
       {/* TESTIMONIALS */}
       <section className="max-w-7xl mx-auto text-center py-32 px-8">
         <TestimonialsSection lang={childLang} />
